@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from "jquery"
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user : any;
+  logo = "assets/home/images/Logo.png";
 
-  ngOnInit(): void {
+  constructor() { }
+  ngOnInit() {
+    $("body").css({"background-color": "#e9ebee"});
+    this.user = localStorage.getItem('user');
+    this.user = JSON.parse(this.user)
+  }
+
+
+  logOut() {
+    localStorage.removeItem('user');
+    this.user = null;
   }
 
 }
