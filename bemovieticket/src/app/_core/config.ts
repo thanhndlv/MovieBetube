@@ -23,9 +23,9 @@ export const configs = {
         },
         admin: {
             user: {
-                getAddUser: "/api/QuanLyNguoiDung/ThemNguoiDung",
-                putUpdateUser:"/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
-                deleteUser:"/api/QuanLyNguoiDung/XoaNguoiDung",
+                postAddUser: "/api/QuanLyNguoiDung/ThemNguoiDung",
+                putUpdateUser: "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+                deleteUser: "/api/QuanLyNguoiDung/XoaNguoiDung",
                 getUserType: "/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung",
                 getInfoUser: "/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=",
                 getListUserPaginate: "/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=",
@@ -38,17 +38,21 @@ export const configs = {
                 getListPaginate: "/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=",
                 getListFilmDay: "api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=",
                 postAddFilm: "/api/QuanLyPhim/ThemPhim",
-                putDemo:"/api/QuanLyPhim/demo",
-                putAddImage: "/api/QuanLyPhim/ThemPhimUploadHinh",
-                postUpdateFilmUpload:"/api/QuanLyPhim/CapNhatPhimUpload",
-                postUpdateFilm:"/api/QuanLyPhim/CapNhatPhim",
-
-
+                putDemo: "/api/QuanLyPhim/demo",
+                putAddImage: "/api/QuanLyPhim/UploadHinhAnhPhim",
+                postUpdateFilmUpload: "/api/QuanLyPhim/CapNhatPhimUpload",
+                postUpdateFilm: "/api/QuanLyPhim/CapNhatPhim",
+                getSearchFilm: "/api/QuanLyPhim/LayThongTinPhim",
             }
 
         },
-        params: {
 
-        }
+    },
+    params: {
+        filmID: "&MaPhim=",
+        filmName: "&tenPhim=",
+        listTheaterID: "&maHeThongRap=",
+        groupID: "&MaNhom=",
+        pageSetUp: "&soPhanTuTrenTrang=10&soTrang="
     }
 }
