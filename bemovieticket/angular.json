@@ -32,11 +32,39 @@
             ],
             "styles": [
               {
-                "input": "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                "input": "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              },
+              {
+                "input": "./node_modules/font-awesome/css/font-awesome.min.css"
+              },
+              {
+                "input": "./node_modules/slick-carousel/slick/slick.scss"
+              },
+              {
+                "input": "./node_modules/slick-carousel/slick/slick-theme.scss"
+              },
+              {
+                "input": "./node_modules/owl.carousel/dist/assets/owl.carousel.css"
+              },
+              {
+                "input": "./node_modules/owl.carousel/dist/assets/owl.theme.default.css"
               },
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "./node_modules/jquery/dist/jquery.min.js"
+              },
+              {
+                "input": "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              },
+              {
+                "input": "./node_modules/slick-carousel/slick/slick.min.js"
+              },
+              {
+                "input": "./node_modules/owl.carousel/dist/owl.carousel.js"
+              }
+            ]
           },
           "configurations": {
             "production": {
