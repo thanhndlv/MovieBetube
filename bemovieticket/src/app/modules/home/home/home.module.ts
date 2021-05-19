@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { AccountComponent } from './account/account.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { SlickCarouselModule } from "ngx-slick-carousel";
 
 const homeRoutes: Routes = [
     {
@@ -25,7 +27,6 @@ const homeRoutes: Routes = [
     // providers: []
     declarations: [HomeComponent, IndexComponent, AccountComponent],
     imports: [CommonModule,NgbModule,SlickCarouselModule, PipeModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(homeRoutes)],
-
     providers: []
 })
 export class HomeModule { }
