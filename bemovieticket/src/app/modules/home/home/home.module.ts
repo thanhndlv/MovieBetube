@@ -5,6 +5,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { IndexComponent } from "../index/index.component";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccountComponent } from './account/account.component';
 
 const homeRoutes: Routes = [
     {
@@ -19,7 +20,7 @@ const homeRoutes: Routes = [
     // declarations: [HomeComponent, IndexComponent, AboutUsComponent, ContactComponent, UtilityComponent, DetailComponent, UserDetailComponent, TicketComponent],
     // imports: [SweetAlert2Module, CommonModule, PipeModule, NgbModule, SlickCarouselModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(homeRoutes)],
     // providers: []
-    declarations: [HomeComponent, IndexComponent],
+    declarations: [HomeComponent, IndexComponent, AccountComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(homeRoutes)],
     providers: []
 })
