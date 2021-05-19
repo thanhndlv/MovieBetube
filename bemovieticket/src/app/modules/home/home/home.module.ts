@@ -8,7 +8,7 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SlickCarouselModule } from "ngx-slick-carousel";
-import { AccountComponent } from './account/account.component';
+import { AccountComponent } from '../account/account.component';
 
 const homeRoutes: Routes = [
     {
