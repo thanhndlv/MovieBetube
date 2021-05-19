@@ -25,7 +25,6 @@ const homeRoutes: Routes = [
     // providers: []
     declarations: [HomeComponent, IndexComponent, AccountComponent],
     imports: [CommonModule,NgbModule,SlickCarouselModule, PipeModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(homeRoutes)],
-
     providers: []
 })
 export class HomeModule { }
