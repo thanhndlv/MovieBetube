@@ -10,7 +10,7 @@ export class infoUser {
 export class getInfoUser {
     public taikhoan: string;
 }
-export class addFilm {
+export class Film {
     public maPhim: number;
     public tenPhim: string;
     public biDanh: string;
