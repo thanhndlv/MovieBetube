@@ -14,12 +14,12 @@ export const configs = {
             getListFilm: "/api/QuanLyPhim/LayDanhSachPhim?maNhom=",
             getListFilmByDay: "/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=",
             getInfoFilm: "/api/QuanLyPhim/LayThongTinPhim?MaPhim=",
-            getInfoTheater: "/api/QuanLyRap/LayThongTinHeThongRap",
-            getInfoTheaterByList: "/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=",
+            getListSystemTheaters: "/api/QuanLyRap/LayThongTinHeThongRap", //tunv edited
+            getListTheaters: "/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=", //tunv edited
             getInfoShowtimeTheater: "/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=",
             getShowtime: "/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=",
             postTicket: "/api/QuanLyDatVe/DatVe",
-            getListTheater: "/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=",
+            getListTicketRoom: "/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=", //tunv edited
         },
         admin: {
             user: {
@@ -51,7 +51,7 @@ export const configs = {
     params: {
         filmID: "&MaPhim=",
         filmName: "&tenPhim=",
-        listTheaterID: "&maHeThongRap=",
+        systemTheaterID: "&maHeThongRap=", //tunv edited
         groupID: "&MaNhom=",
         pageSetUp: "&soPhanTuTrenTrang=10&soTrang="
     }
