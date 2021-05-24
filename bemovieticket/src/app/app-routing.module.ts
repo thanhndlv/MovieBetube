@@ -6,7 +6,7 @@ import { AccountModule } from "./modules/home/account/account.module"
 const routes: Routes = [
   { path: "", loadChildren: "./modules/home/home/home.module#HomeModule" },
   { path: "account", loadChildren: "./modules/home/account/account.module#AccountModule" },
-  { path: "admin", loadChildren: "./modules/admin/admin.module#AdminModule" }  //k cần thiết phải 
+  { path: "", loadChildren: "./modules/admin/admin.module#AdminModule" }
 ];
 
 @NgModule({
