@@ -31,25 +31,6 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  // signIn() {
-  //   this.user.taiKhoan = this.loginForm.get("userName").value;
-  //   this.user.matKhau = this.loginForm.get("password").value;
-  //   this.homeService.postSignIn(this.user).subscribe(
-  //     res => {
-  //       if (res.maLoaiNguoiDung == configs.userType.user) {
-  //         localStorage.setItem("user", JSON.stringify(res));
-  //         this.router.navigate(["/"]);
-  //       } else {
-  //         localStorage.setItem("userAdmin", JSON.stringify(res));
-  //         this.router.navigate(["/admin/film"]);
-  //       }
-  //     },
-  //     error => {
-  //       this.error = error.error;
-  //       console.log(error);
-  //     }
-  //   );
-  // }
   async signIn() {
     this.user.taiKhoan = this.loginForm.get("userName").value;
     this.user.matKhau = this.loginForm.get("password").value;
