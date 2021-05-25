@@ -7,12 +7,12 @@ import * as $ from "jquery";
 })
 export class HomeComponent implements OnInit {
 
-  user : any;
+  user: any;
   logo = "assets/home/images/Logo.png";
 
   constructor() { }
   ngOnInit() {
-    $("body").css({"background-color": "#e9ebee"});
+    $("body").css({ "background-color": "#e9ebee" });
     this.user = localStorage.getItem('user');
     this.user = JSON.parse(this.user)
   }
