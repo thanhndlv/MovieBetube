@@ -46,12 +46,23 @@ export class HomeService {
     return result
   }
 
-  public postSignIn(user: any): Observable<any> {
-    let header = new  HttpHeaders({"Content-Type": "application/json"});
-    let result: any =  this._http.post(this.API_URL.postSignIn, user, {
-      headers: header,
-      responseType: "json"
-    });
+  // public postSignIn(user: any): Observable<any> {
+  //   let header = new  HttpHeaders({"Content-Type": "application/json"});
+  //   let result: any =  this._http.post(this.API_URL.postSignIn, user, {
+  //     headers: header,
+  //     responseType: "json"
+  //   });
+  //   console.log(result);
+  //   return result;
+  // }
+  async postSignIn(username: string, password: string): Promise<any> {
+    let result = await this._http.post<any>(this.API_URL.postSignIn, {
+      taiKhoan: username,
+      matKhau: password
+    }).toPromise();
+    if (result.accessToken) {
+      localStorage.setItem('Token', result.accessToken)
+    }
     console.log(result);
     return result;
   }

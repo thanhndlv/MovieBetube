@@ -1,3 +1,4 @@
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeModule } from "./modules/home/home/home.module";
@@ -10,7 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [HomeModule, AdminModule, AccountModule, RouterModule.forRoot(routes)],
+  imports: [HomeModule, AdminModule, AccountModule, RouterModule.forRoot(routes), SweetAlert2Module.forRoot()],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
