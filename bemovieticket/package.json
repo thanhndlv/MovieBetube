@@ -31,6 +31,7 @@
     "rxjs": "~6.6.0",
     "safe-pipe": "^1.0.3",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.0.11",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
