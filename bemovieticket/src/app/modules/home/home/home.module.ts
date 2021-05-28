@@ -8,11 +8,16 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SlickCarouselModule } from "ngx-slick-carousel";
+import { UserDetailComponent } from '../user-detail/user-detail.component';
 const homeRoutes: Routes = [
     {
         path: "",
         component: HomeComponent,
-        children: [{ path: "", component: IndexComponent }]
+        children: [{ path: "", component: IndexComponent },
+        {path:"user-detail/:userName", component: UserDetailComponent}
+        ]
+        
+
     }
     
 ];
