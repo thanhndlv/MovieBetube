@@ -7,12 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeService } from './_core/service/home.service';
 import { AuthInterceptor } from './_core/interceptors/auth.interceptor';
+import { UserDetailComponent } from './modules/home/user-detail/user-detail.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserDetailComponent],
 
   imports: [
     BrowserModule,
