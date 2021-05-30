@@ -1,31 +1,173 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { config, from, Observable } from 'rxjs';
-import { configs } from '../config';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { configs } from "../config";
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AdminService {
   API_URL = {
     postAddUser: configs.domain + configs.apiRouter.admin.user.postAddUser,
-    putUpdateUser: configs.domain + configs.apiRouter.admin.user.putUpdateUser,
+    getListUser:
+      configs.domain +
+      configs.apiRouter.admin.user.getListUser +
+      configs.groupID,
+    getListUserPaginate:
+      configs.domain +
+      configs.apiRouter.admin.user.getListUserPaginate +
+      configs.groupID +
+      configs.params.pageSetUp,
+    getSearchUser: configs.domain + configs.apiRouter.admin.user.getSearchUser,
     deleteUser: configs.domain + configs.apiRouter.admin.user.deleteUser,
-    getUserType: configs.domain + configs.apiRouter.admin.user.getUserType,
-    getInfoUser: configs.domain + configs.apiRouter.admin.user.getInfoUser + configs.groupID,
-    getListUserPaginate: configs.domain + configs.apiRouter.admin.user.getListUserPaginate + configs.groupID,
-    getSearchUser: configs.domain + configs.apiRouter.admin.user.getSearchUser + configs.groupID,
-    postCreateShowtime: configs.domain + configs.apiRouter.admin.film.postCreateShowtime,
-    getListFilm: configs.domain + configs.apiRouter.admin.film.getListFilm + configs.groupID,
-    getListPaginate: configs.domain + configs.apiRouter.admin.film.getListPaginate + configs.groupID,
-    getListFilmDay: configs.domain + configs.apiRouter.admin.film.getListFilmDay + configs.groupID,
+    putUpdateUser: configs.domain + configs.apiRouter.admin.user.putUpdateUser,
+    getListFilmPaginate:
+      configs.domain +
+      configs.apiRouter.admin.film.getListFilmPaginate +
+      configs.groupID +
+      configs.params.pageSetUp,
     postAddFilm: configs.domain + configs.apiRouter.admin.film.postAddFilm,
-    putDemo: configs.domain + configs.apiRouter.admin.film.putDemo,
-    putAddImage: configs.domain + configs.apiRouter.admin.film.putAddImage,
-    postUpdateFilmUpload: configs.domain + configs.apiRouter.admin.film.postUpdateFilmUpload,
-    postUpdateFilm: configs.domain + configs.apiRouter.admin.film.postUpdateFilm,
+    postUploadImgFilm:
+      configs.domain + configs.apiRouter.admin.film.postUploadImgFilm,
+    deleteFilm: configs.domain + configs.apiRouter.admin.film.deleteFilm,
     getSearchFilm: configs.domain + configs.apiRouter.admin.film.getSearchFilm,
+    postUpdateFilm:
+      configs.domain + configs.apiRouter.admin.film.postUpdateFilm,
+    postAddShowTime:
+      configs.domain + configs.apiRouter.admin.film.postAddShowTime,
+    getListShowtimes: configs.domain + configs.apiRouter.home.getShowtime,
+  };
+
+  responseType = "json";
+  header = new HttpHeaders({ "Content-Type": "application/json" });
+
+  constructor(private _http: HttpClient) {}
+
+  // User API
+  postAddUser(userInfo: any, token: string): Observable<any> {
+    let result = this._http.post(this.API_URL.postAddUser, userInfo, {
+      headers: this.createHeaderWithAuth(token),
+      responseType: "json"
+    });
+    console.log(token);
+    console.log(result);
+    return result;
   }
-  constructor(private _https = HttpClient) { }
 
+  getListUser(): Observable<any[]> {
+    let result: any = this._http.get(this.API_URL.getListUser);
+    return result;
+  }
 
+  getListUserPaginate(pageNumber: any): Observable<any> {
+    let result: any = this._http.get(
+      this.API_URL.getListUserPaginate + pageNumber
+    );
+    return result;
+  }
+
+  getSearchUser(userName: any): Observable<any> {
+    let result: any = this._http.get(
+      this.API_URL.getSearchUser +
+        userName +
+        configs.params.groupID +
+        configs.groupID
+    );
+    return result;
+  }
+
+  deleteUser(userName: any, token: string): Observable<any> {
+    let result: any = this._http.delete(this.API_URL.deleteUser + userName, {
+      headers: this.createHeaderWithAuth(token),
+      responseType: "text"
+    });
+    return result;
+  }
+
+  putUpdateUser(userInfo: any, token: string): Observable<any> {
+    let result: any = this._http.put(this.API_URL.putUpdateUser, userInfo, {
+      headers: this.createHeaderWithAuth(token),
+      responseType: "text"
+    });
+    return result;
+  }
+
+  // End User API
+
+  //  Film API
+
+  getListFilmPaginate(pageNumber: any): Observable<any> {
+    let result: any = this._http.get(
+      this.API_URL.getListFilmPaginate + pageNumber
+    );
+    return result;
+  }
+
+  postAddFilm(film: any, token: string): Observable<any> {
+    let result = this._http.post(this.API_URL.postAddFilm, film, {
+      headers: this.createHeaderWithAuth(token),
+      responseType: "json"
+    });
+    return result;
+  }
+
+  postUploadImgFilm(data: any, token: string): Observable<any> {
+    let result = this._http.post(this.API_URL.postUploadImgFilm, data, {
+      headers: this.createHeaderWithAuthNotContentType(token),
+      responseType: "text"
+    });
+    return result;
+  }
+
+  deleteFilm(filmID: any, token: string): Observable<any> {
+    let result: any = this._http.delete(this.API_URL.deleteFilm + filmID, {
+      headers: this.createHeaderWithAuth(token),
+      responseType: "text"
+    });
+    return result;
+  }
+
+  getSearchFilm(filmID: any): Observable<any> {
+    let result: any = this._http.get(this.API_URL.getSearchFilm + filmID);
+    return result;
+  }
+
+  postUpdateFilm(filmInfo: any, token: string): Observable<any> {
+    let result: any = this._http.post(this.API_URL.postUpdateFilm, filmInfo, {
+      headers: this.createHeaderWithAuth(token),
+      responseType: "text"
+    });
+    return result;
+  }
+
+  postAddShowTime(showTimeInfo: any, token: string): Observable<any> {
+    let result: any = this._http.post(
+      this.API_URL.postAddShowTime,
+      showTimeInfo,
+      { headers: this.createHeaderWithAuth(token), responseType: "text" }
+    );
+    return result;
+  }
+
+  // End Film API
+
+  // Showtime API
+  getListShowtimes(filmID: string): Observable<any> {
+    let result: any = this._http.get(this.API_URL.getListShowtimes + filmID);
+    return result;
+  }
+  // End Showtime API
+
+  createHeaderWithAuth(token: string): HttpHeaders {
+    return new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    });
+  }
+
+  createHeaderWithAuthNotContentType(token: string): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: "Bearer " + token
+    });
+  }
 }

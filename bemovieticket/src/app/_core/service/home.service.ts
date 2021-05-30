@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { domain } from 'process';
 import { config, Observable, } from 'rxjs';
@@ -46,5 +46,40 @@ export class HomeService {
     return result
   }
 
+  async postSignIn(username: string, password: string): Promise<any> {
+    let result = await this._http.post<any>(this.API_URL.postSignIn, {
+      taiKhoan: username,
+      matKhau: password
+    }).toPromise();
+    if (result.accessToken) {
+      localStorage.setItem('Token', result.accessToken)
+    }
+    console.log(result);
+    return result;
+  }
+  public postSignUp(user: any): Observable<any>{
+    let header = new HttpHeaders({"Content-Type": "application/json"});
+    let result: any = this._http.post(this.API_URL.postSignUp, user,{
+      headers: header,
+      responseType: "json"
+    });
+    return result;
+  }
+  public getInfoUser(userName: string, token): Observable<any[]>{
+      let header = new HttpHeaders({"Content-Type" : "application/json", Authorization: "Bearer " + token });
+      let result: any = this._http.post(this.API_URL.getInfoUser, {taiKhoan: userName},
+      {
+        headers: header
+      }
 
+      );
+    return result;
+  }
+  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]>{
+     let header = new HttpHeaders({"Content-Type": "application/json", Authorization: "Bearer " + token});
+     let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
+       headers: header
+     });
+     return result;
+  }
 }

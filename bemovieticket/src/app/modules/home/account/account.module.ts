@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AccountComponent } from './account.component'
-import { from } from 'rxjs';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 const accountRoutes: Routes = [
-
   {
-    path: "",
+    path: "account",
     component: AccountComponent,
     children: [
       {
@@ -21,8 +19,7 @@ const accountRoutes: Routes = [
         path: "sign-in",
         component: SignInComponent
       }
-    ]
-
+    ],
   }
 ];
 @NgModule({

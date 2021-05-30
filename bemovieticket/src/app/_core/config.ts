@@ -20,32 +20,30 @@ export const configs = {
             getShowtime: "/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=",
             postTicket: "/api/QuanLyDatVe/DatVe",
             getListTicketRoom: "/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=", //tunv edited
+            
         },
         admin: {
             user: {
-                postAddUser: "/api/QuanLyNguoiDung/ThemNguoiDung",
-                putUpdateUser: "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
-                deleteUser: "/api/QuanLyNguoiDung/XoaNguoiDung",
-                getUserType: "/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung",
-                getInfoUser: "/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=",
-                getListUserPaginate: "/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=",
-                getSearchUser: "/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=",
-
+              postAddUser: "/api/QuanLyNguoiDung/ThemNguoiDung",
+              deleteUser: "/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=",
+              putUpdateUser: "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+              getSearchUser: "/api/QuanLyNguoiDung/TimKiemNguoiDung?tuKhoa=",
+              getListUser: "/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=",
+              getListUserPaginate: "/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom="
             },
             film: {
-                postCreateShowtime: "/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=",
-                getListFilm: "/api/QuanLyPhim/LayDanhSachPhim?maNhom",
-                getListPaginate: "/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=",
-                getListFilmDay: "api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=",
-                postAddFilm: "/api/QuanLyPhim/ThemPhim",
-                putDemo: "/api/QuanLyPhim/demo",
-                putAddImage: "/api/QuanLyPhim/UploadHinhAnhPhim",
-                postUpdateFilmUpload: "/api/QuanLyPhim/CapNhatPhimUpload",
-                postUpdateFilm: "/api/QuanLyPhim/CapNhatPhim",
-                getSearchFilm: "/api/QuanLyPhim/LayThongTinPhim",
+              postAddFilm: "/api/QuanLyPhim/ThemPhim",
+              deleteFilm: "/api/QuanLyPhim/XoaPhim?MaPhim=",
+              postUpdateFilm: "/api/QuanLyPhim/CapNhatPhim",
+              postUploadImgFilm: "/api/QuanLyPhim/UploadHinhAnhPhim",
+              getListFilmPaginate: "/api/QuanLyPhim/LayDanhSachPhimPhanTrang?MaNhom=",
+              getSearchFilm: "/api/QuanLyPhim/LayThongTinPhim?MaPhim=",
+              postAddShowTime: "/api/QuanLyDatVe/TaoLichChieu"
+            },
+            showTimes: {
+              postAddShowTime: "/api/QuanLyDatVe/TaoLichChieu"
             }
-
-        },
+          }
 
     },
     params: {
