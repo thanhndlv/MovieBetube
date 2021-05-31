@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
     this.getUserInfo();
   }
   getUserInfo() {
-    this._homeService.putChangeInfoUser(this.userName, this.token).subscribe(
+    this._homeService.getInfoUser(this.userName, this.token).subscribe(
       res => {
         this.user = res;
         this.bookingHistory = this.user.thongTinDatVe;
@@ -50,7 +50,7 @@ export class UserDetailComponent implements OnInit {
             Validators.minLength(6),
             Validators.maxLength(32)
           ]),
-          phoneNumber: new FormControl(this.user.soDienThoai,[
+          phoneNumber: new FormControl(this.user.soDT,[
             Validators.required,
             Validators.pattern("^(09|03|08|07|05)[0-9]{8}")
           ]),
@@ -66,9 +66,33 @@ export class UserDetailComponent implements OnInit {
         });
         this.isLoading = false;
       },
-      
+      error => {
+        console.log(error);
+      }
     );
 
   }
-
+  updateInfo() {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let token = user.accessToken;
+    this.userInfo.taiKhoan = this.user.taiKhoan;
+    this.userInfo.email = this.userForm.get("email").value;
+    this.userInfo.hoTen = this.userForm.get("fullName").value;
+    this.userInfo.maNhom = configs.groupID;
+    this.userInfo.soDt = this.userForm.get("phoneNumber").value;
+    this.userInfo.maLoaiNguoiDung = "KhachHang";
+    this.userInfo.matKhau = this.userForm.get("password").value;
+    this._homeService.putChangeInfoUser(this.userInfo, token).subscribe(
+      res => {
+        $("#showAlertAddSuccess").click();
+        this.getUserInfo();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  showModal(index: any) {
+    this.listSeat = this.bookingHistory[index].danhSachGhe;
+  }
 }

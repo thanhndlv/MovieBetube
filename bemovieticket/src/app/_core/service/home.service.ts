@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { domain } from 'process';
 import { config, Observable, } from 'rxjs';
@@ -46,40 +46,74 @@ export class HomeService {
     return result
   }
 
-  async postSignIn(username: string, password: string): Promise<any> {
-    let result = await this._http.post<any>(this.API_URL.postSignIn, {
-      taiKhoan: username,
-      matKhau: password
-    }).toPromise();
-    if (result.accessToken) {
-      localStorage.setItem('Token', result.accessToken)
-    }
+  // async postSignIn(username: string, password: string): Promise<any> {
+  //   let result = await this._http.post<any>(this.API_URL.postSignIn, {
+  //     taiKhoan: username,
+  //     matKhau: password
+  //   }).toPromise();
+  //   if (result.accessToken) {
+  //     localStorage.setItem('Token', result.accessToken)
+  //   }
+  //   console.log(result);
+  //   return result;
+  // }
+  public postSignIn(user: any): Observable<any> {
+    //Content-Type là do phía back-end định nghĩa, bắt buộc phải khai báo đúng
+    let header = new HttpHeaders({ "Content-Type": "application/json" });
+    //Khi sử dụng post thì phải gửi kèm theo cục body, ở đây body là {taiKhoan: userName, matKhau: password}
+    //và kèm theo header để server có thể đọc hiểu được request
+    let result = this._http.post(this.API_URL.postSignIn, user, {
+      headers: header,
+      responseType: "json"
+    });
     console.log(result);
     return result;
   }
-  public postSignUp(user: any): Observable<any>{
-    let header = new HttpHeaders({"Content-Type": "application/json"});
-    let result: any = this._http.post(this.API_URL.postSignUp, user,{
+
+  
+  public postSignUp(user: any): Observable<any> {
+    let header = new HttpHeaders({ "Content-Type": "application/json" });
+    let result: any = this._http.post(this.API_URL.postSignUp, user, {
       headers: header,
       responseType: "json"
     });
     return result;
   }
-  public getInfoUser(userName: string, token): Observable<any[]>{
-      let header = new HttpHeaders({"Content-Type" : "application/json", Authorization: "Bearer " + token });
-      let result: any = this._http.post(this.API_URL.getInfoUser, {taiKhoan: userName},
+  public getInfoUser(userName: string, token): Observable<any[]> {
+    let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
+    let result: any = this._http.post(this.API_URL.getInfoUser, { taiKhoan: userName },
       {
         headers: header
       }
 
-      );
+    );
     return result;
   }
-  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]>{
-     let header = new HttpHeaders({"Content-Type": "application/json", Authorization: "Bearer " + token});
-     let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
-       headers: header
-     });
-     return result;
+  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]> {
+    let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
+    let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
+      headers: header
+    });
+    return result;
+  }
+
+  public getListTicketRoom(systemTheaterID: string): Observable<any> {
+    let result: any = this._http.get(
+      this.API_URL.getListTicketRoom + systemTheaterID
+    );
+    return result;
+  }
+
+  postBookingTicket(bookingInfo: any, token: string): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    });
+    let result: any = this._http.post(
+      this.API_URL.postTicket,
+      bookingInfo,
+      { headers: header, responseType: "text" }
+    );
+    return result;
   }
 }

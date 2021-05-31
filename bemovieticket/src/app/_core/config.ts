@@ -1,5 +1,5 @@
 export const configs = {
-    domain: "https://movie0706.cybersoft.edu.vn/",
+    domain: "https://movie0706.cybersoft.edu.vn",
     groupID: "GP10",
     userType: {
         admin: "QuanTri",
