@@ -18,10 +18,12 @@ const homeRoutes: Routes = [
     {
         path: "",
         component: HomeComponent,
-        children: [{ path: "", component: IndexComponent },
-        {path:"user-detail/:userName", component: UserDetailComponent}
+        children: [
+            { path: "", component: IndexComponent },
+            { path: "user-detail/:userName", component: UserDetailComponent },
+            { path: "ticket/:showTimeID", component: TicketComponent },
         ]
-        
+
 
     }
 
