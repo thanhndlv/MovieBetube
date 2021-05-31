@@ -89,7 +89,7 @@ export class HomeService {
     );
     return result;
   }
-  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]> {
+  public putChangeInfoUser(userInfo: any, token: string): Observable<any[]> {
     let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
     let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
       headers: header
