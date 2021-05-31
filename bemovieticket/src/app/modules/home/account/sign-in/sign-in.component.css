@@ -1,0 +1,15 @@
+#logo {
+  max-height: 70px;
+  cursor: pointer;
+}
+
+.login-form, .alert {
+  max-width: 300px;
+  margin: 0px auto;
+  /* border-radius: 8px; */
+}
+
+.h3 {
+  color: #333;
+}
+/*# sourceMappingURL=sign-in.component.css.map */

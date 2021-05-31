@@ -13,7 +13,10 @@ import { AuthInterceptor } from './_core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
+<<<<<<< HEAD
 
+=======
+>>>>>>> home
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -1,3 +1,4 @@
+import { DetailComponent } from './../detail/detail.component';
 import { TicketComponent } from './../ticket/ticket.component';
 import { HomeService } from './../../../_core/service/home.service';
 import { AuthInterceptor } from './../../../_core/interceptors/auth.interceptor';
@@ -22,6 +23,7 @@ const homeRoutes: Routes = [
             { path: "", component: IndexComponent },
             { path: "user-detail/:userName", component: UserDetailComponent },
             { path: "ticket/:showTimeID", component: TicketComponent },
+            { path: "detail/:filmID", component: DetailComponent },
         ]
 
 
@@ -30,10 +32,7 @@ const homeRoutes: Routes = [
 ];
 
 @NgModule({
-    // declarations: [HomeComponent, IndexComponent, AboutUsComponent, ContactComponent, UtilityComponent, DetailComponent, UserDetailComponent, TicketComponent],
-    // imports: [SweetAlert2Module, CommonModule, PipeModule, NgbModule, SlickCarouselModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(homeRoutes)],
-    // providers: []
-    declarations: [HomeComponent, IndexComponent, TicketComponent, UserDetailComponent],
+    declarations: [HomeComponent, IndexComponent, TicketComponent, DetailComponent, UserDetailComponent],
     imports: [CommonModule, NgbModule, SlickCarouselModule, PipeModule, FormsModule, SweetAlert2Module, ReactiveFormsModule, RouterModule.forChild(homeRoutes)],
     providers: [HomeService, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]]
 })
