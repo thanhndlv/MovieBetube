@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { domain } from 'process';
 import { config, Observable, } from 'rxjs';
@@ -69,29 +69,51 @@ export class HomeService {
     console.log(result);
     return result;
   }
-  public postSignUp(user: any): Observable<any>{
-    let header = new HttpHeaders({"Content-Type": "application/json"});
-    let result: any = this._http.post(this.API_URL.postSignUp, user,{
+
+  
+  public postSignUp(user: any): Observable<any> {
+    let header = new HttpHeaders({ "Content-Type": "application/json" });
+    let result: any = this._http.post(this.API_URL.postSignUp, user, {
       headers: header,
       responseType: "json"
     });
     return result;
   }
-  public getInfoUser(userName: string, token): Observable<any[]>{
-      let header = new HttpHeaders({"Content-Type" : "application/json", Authorization: "Bearer " + token });
-      let result: any = this._http.post(this.API_URL.getInfoUser, {taiKhoan: userName},
+  public getInfoUser(userName: string, token): Observable<any[]> {
+    let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
+    let result: any = this._http.post(this.API_URL.getInfoUser, { taiKhoan: userName },
       {
         headers: header
       }
 
-      );
+    );
     return result;
   }
-  public putChangeInfoUser(userInfo: any, token: string): Observable<any[]>{
-     let header = new HttpHeaders({"Content-Type": "application/json", Authorization: "Bearer " + token});
-     let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
-       headers: header
-     });
-     return result;
+  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]> {
+    let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
+    let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
+      headers: header
+    });
+    return result;
+  }
+
+  public getListTicketRoom(systemTheaterID: string): Observable<any> {
+    let result: any = this._http.get(
+      this.API_URL.getListTicketRoom + systemTheaterID
+    );
+    return result;
+  }
+
+  postBookingTicket(bookingInfo: any, token: string): Observable<any> {
+    let header = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    });
+    let result: any = this._http.post(
+      this.API_URL.postTicket,
+      bookingInfo,
+      { headers: header, responseType: "text" }
+    );
+    return result;
   }
 }

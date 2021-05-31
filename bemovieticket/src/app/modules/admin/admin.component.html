@@ -13,28 +13,29 @@
         <a
           routerLink="/admin/film"
           [ngClass]="{ 'text-dark': router.url != '/admin/film' }"
-          ><i class="fas fa-photo-video mr-2"></i> Phim</a
+        >
+          <i class="mr-2"></i>Phim</a
         >
       </h5>
       <h5 class="mb-4 font-weight-bold">
         <a
           routerLink="/admin/user"
           [ngClass]="{ 'text-dark': router.url != '/admin/user' }"
-          ><i class="fas fa-users mr-2"></i> Người dùng</a
+          ><i class="mr-2"></i> Người dùng</a
         >
       </h5>
       <!-- <h5 class="mb-4 font-weight-bold">
         <a href="" [ngClass]="{ 'text-dark': router.url != '/admin/theater' }"
-          ><i class="fas fa-theater-masks mr-2"></i> Rạp</a
+          ><i class="fa fa-theater-masks mr-2"></i> Rạp</a
         >
       </h5> -->
 
       <h5 class="mb-4 font-weight-bold">
         <a
-          routerLink="/account/login"
+          routerLink="/account/sign-in"
           class="text-dark"
           (click)="signOutAdmin()"
-          ><i class="fas fa-sign-out-alt mr-2"></i> Đăng xuất</a
+          ><i class="mr-2"></i> Đăng xuất</a
         >
       </h5>
     </div>
@@ -44,7 +45,7 @@
           <router-outlet></router-outlet>
         </div>
         <div class="footer text-secondary small text-center py-3">
-          © 2019 Betube All rights reserved.
+          © 2021 Betube All rights reserved.
         </div>
       </div>
     </div>
@@ -55,34 +56,34 @@
   <div class="fixed-bottom bg-white nav-mobile">
     <div class="row">
       <div class="col-3 text-center p-0">
-        <a routerLink="" class="text-dark"><i class="fas fa-home"></i></a>
+        <a routerLink="" class="text-dark"><i class="fa fa-home"></i></a>
       </div>
       <div class="col-3 text-center p-0">
         <a
           routerLink="/admin/film"
           [ngClass]="{ 'text-dark': router.url != '/admin/film' }"
-          ><i class="fas fa-photo-video mr-2"></i
+          ><i class="fa fa-photo-video mr-2"></i
         ></a>
       </div>
       <div class="col-3 text-center p-0">
         <a
           routerLink="/admin/user"
           [ngClass]="{ 'text-dark': router.url != '/admin/user' }"
-          ><i class="fas fa-users mr-2"></i
+          ><i class="fa fa-users mr-2"></i
         ></a>
       </div>
       <div class="col-3 text-center p-0">
         <a
-          routerLink="/account/login"
+          routerLink="/account/sign-in"
           class="text-dark"
           (click)="signOutAdmin()"
-          ><i class="fas fa-sign-out-alt mr-2"></i
+          ><i class="fa fa-sign-out-alt mr-2"></i
         ></a>
       </div>
     </div>
   </div>
   <router-outlet></router-outlet>
   <div class="footer text-secondary small text-center py-3">
-    © 2019 Betube All rights reserved.
+    © 2021 Betube All rights reserved.
   </div>
 </div>

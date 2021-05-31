@@ -8,7 +8,7 @@
       data-target="#myModal"
       (click)="setUpAddFilm()"
     >
-      <i class="fas fa-user-plus"></i> Thêm mới
+      Thêm mới
     </button>
   </div>
   <div class="col-md-10 pr-0">
@@ -33,7 +33,7 @@
     data-target="#myModal"
     (click)="setUpAddFilm()"
   >
-    <i class="fas fa-user-plus"></i> Thêm mới
+    Thêm mới
   </button>
 </div>
 <div class="table-responsive">
@@ -57,7 +57,8 @@
             class="btn btn-info btn-sm"
             href="{{ film.hinhAnh }}"
             target="_blank"
-            ><i class="fas fa-eye"></i> <span *ngIf="!isMobile">Xem ảnh</span>
+          >
+            <span *ngIf="!isMobile">Xem ảnh</span>
           </a>
         </td>
         <td>
@@ -66,7 +67,6 @@
               class="btn btn-dark mr-2 btn-sm"
               [routerLink]="['/admin/film/show-time', film.maPhim]"
             >
-              <i class="fas fa-calendar-alt"></i>
               <span *ngIf="!isMobile">Lịch chiếu</span>
             </a>
             <button
@@ -76,7 +76,6 @@
               data-target="#myModal"
               (click)="editFilm(film.maPhim)"
             >
-              <i class="fas fa-user-edit"></i>
               <span *ngIf="!isMobile">Sửa</span>
             </button>
             <button
@@ -85,7 +84,6 @@
               (click)="setFilmDelete(film.maPhim)"
               [swal]="deleteSwal"
             >
-              <i class="fas fa-user-times"></i>
               <span *ngIf="!isMobile">Xóa</span>
             </button>
           </div>
@@ -375,9 +373,7 @@
                     class="btn btn-outline-secondary calendar"
                     (click)="d.toggle()"
                     type="button"
-                  >
-                    <i class="fas fa-calendar-alt"></i>
-                  </button>
+                  ></button>
                 </div>
               </div>
             </div>
