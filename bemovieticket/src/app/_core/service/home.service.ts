@@ -16,7 +16,7 @@ export class HomeService {
     putChangeInfoUser: configs.domain + configs.apiRouter.home.putChangeInfoUser,
     getListFilm: configs.domain + configs.apiRouter.home.getListFilm + configs.groupID,
     getListFilmByDay: configs.domain + configs.apiRouter.home.getListFilmByDay + configs.groupID,
-    getInfoFilm: configs.domain + configs.apiRouter.home.getInfoFilm + configs.params.filmID,
+    getInfoFilm: configs.domain + configs.apiRouter.home.getInfoFilm, //tunv edited
     getListSystemTheaters: configs.domain + configs.apiRouter.home.getListSystemTheaters, //tunv edited
     getListTheaters: configs.domain + configs.apiRouter.home.getListTheaters, //tunv edited
     getInfoShowtimeTheater: configs.domain + configs.apiRouter.home.getInfoShowtimeTheater + configs.groupID,
@@ -67,9 +67,9 @@ export class HomeService {
     });
     return result;
   }
-  public getInfoUser(userName: string, token): Observable<any[]> {
+  public getInfoUser(userName: string, token): Observable<any> {
     let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
-    let result: any = this._http.post(this.API_URL.getInfoUser, { taiKhoan: userName },
+    let result = this._http.post(this.API_URL.getInfoUser, { taiKhoan: userName },
       {
         headers: header
       }
@@ -77,7 +77,7 @@ export class HomeService {
     );
     return result;
   }
-  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]> {
+  public putChangeInfoUser(userInfo: string, token: string): Observable<any> {
     let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
     let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
       headers: header
@@ -86,7 +86,7 @@ export class HomeService {
   }
 
   public getListTicketRoom(systemTheaterID: string): Observable<any> {
-    let result: any = this._http.get(
+    let result = this._http.get(
       this.API_URL.getListTicketRoom + systemTheaterID
     );
     return result;
@@ -97,11 +97,16 @@ export class HomeService {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token
     });
-    let result: any = this._http.post(
+    let result = this._http.post(
       this.API_URL.postTicket,
       bookingInfo,
       { headers: header, responseType: "text" }
     );
+    return result;
+  }
+
+  public getInfoFilm(filmID: string): Observable<any> {
+    let result = this._http.get(this.API_URL.getInfoFilm + filmID);
     return result;
   }
 }
