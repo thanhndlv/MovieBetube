@@ -46,14 +46,26 @@ export class HomeService {
     return result
   }
 
-  async postSignIn(username: string, password: string): Promise<any> {
-    let result = await this._http.post<any>(this.API_URL.postSignIn, {
-      taiKhoan: username,
-      matKhau: password
-    }).toPromise();
-    if (result.accessToken) {
-      localStorage.setItem('Token', result.accessToken)
-    }
+  // async postSignIn(username: string, password: string): Promise<any> {
+  //   let result = await this._http.post<any>(this.API_URL.postSignIn, {
+  //     taiKhoan: username,
+  //     matKhau: password
+  //   }).toPromise();
+  //   if (result.accessToken) {
+  //     localStorage.setItem('Token', result.accessToken)
+  //   }
+  //   console.log(result);
+  //   return result;
+  // }
+  public postSignIn(user: any): Observable<any> {
+    //Content-Type là do phía back-end định nghĩa, bắt buộc phải khai báo đúng
+    let header = new HttpHeaders({ "Content-Type": "application/json" });
+    //Khi sử dụng post thì phải gửi kèm theo cục body, ở đây body là {taiKhoan: userName, matKhau: password}
+    //và kèm theo header để server có thể đọc hiểu được request
+    let result = this._http.post(this.API_URL.postSignIn, user, {
+      headers: header,
+      responseType: "json"
+    });
     console.log(result);
     return result;
   }
@@ -75,7 +87,7 @@ export class HomeService {
       );
     return result;
   }
-  public putChangeInfoUser(userInfo: string, token: string): Observable<any[]>{
+  public putChangeInfoUser(userInfo: any, token: string): Observable<any[]>{
      let header = new HttpHeaders({"Content-Type": "application/json", Authorization: "Bearer " + token});
      let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
        headers: header
