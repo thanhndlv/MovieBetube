@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { AdminService } from "../../../_core/service/admin.service";
 import { HomeService } from "../../../_core/service/home.service";
-import { Film, ShowTime } from "../../../_core/model/model";
+import { Film, MovieSchedule } from "../../../_core/model/model";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import * as $ from "jquery";
 
@@ -17,7 +17,7 @@ export class ShowTimeComponent implements OnInit {
   listShowTime: any;
   listRoom: any;
   addShowTimeForm: any;
-  showTime = new ShowTime();
+  showTime = new MovieSchedule();
   filmID: any;
   token = JSON.parse(localStorage.getItem("userAdmin"));
   accessToken = this.token.accessToken;
@@ -93,12 +93,12 @@ export class ShowTimeComponent implements OnInit {
   }
 
   addShowTime() {
-    this.showTime.maPhim = this.filmID;
+    this.showTime.filmId = this.filmID;
     let date = this.addShowTimeForm.get("date").value;
     let time = this.addShowTimeForm.get("time").value;
-    this.showTime.ngayChieuGioChieu = this.getShowTime(date, time);
-    this.showTime.maRap = this.addShowTimeForm.get("theaterID").value;
-    this.showTime.giaVe = this.addShowTimeForm.get("ticketPrice").value;
+    this.showTime.showTime = this.getShowTime(date, time);
+    this.showTime.theaterId = this.addShowTimeForm.get("theaterID").value;
+    this.showTime.fare = this.addShowTimeForm.get("ticketPrice").value;
 
     this.adminService
       .postAddShowTime(this.showTime, this.accessToken)

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AdminService } from "./../../../_core/service/admin.service";
-import { Film, ShowTime } from "../../../_core/model/model";
+import { Film, MovieSchedule } from "../../../_core/model/model";
 import { configs } from "../../../_core/config";
 import * as $ from "jquery";
 
@@ -116,20 +116,20 @@ export class FilmComponent implements OnInit {
   }
 
   addFilm() {
-    this.film.maPhim = this.addFilmForm.get("filmID").value;
-    this.film.tenPhim = this.addFilmForm.get("filmName").value;
-    this.film.biDanh = this.addFilmForm.get("slugFilm").value;
+    this.film.filmId = this.addFilmForm.get("filmID").value;
+    this.film.filmName = this.addFilmForm.get("filmName").value;
+    this.film.alias = this.addFilmForm.get("slugFilm").value;
     this.film.trailer = this.addFilmForm.get("trailer").value;
-    this.film.hinhAnh = this.film.tenPhim + ".jpg";
-    this.film.moTa = this.addFilmForm.get("description").value;
-    this.film.ngayKhoiChieu = this.addFilmForm.get("premiereDate").value;
-    this.film.danhGia = this.addFilmForm.get("rate").value;
-    this.film.maNhom = configs.groupID;
+    this.film.image = this.film.filmName + ".jpg";
+    this.film.description = this.addFilmForm.get("description").value;
+    this.film.openingDate = this.addFilmForm.get("premiereDate").value;
+    this.film.review = this.addFilmForm.get("rate").value;
+    this.film.groupId = configs.groupID;
     this.adminService.postAddFilm(this.film, this.accessToken).subscribe(
       res => {
         let frmData = new FormData();
-        frmData.append("File", this.imgFilm, this.film.tenPhim + "gr10.jpg");
-        frmData.append("tenPhim", this.film.tenPhim);
+        frmData.append("File", this.imgFilm, this.film.filmName + "gr10.jpg");
+        frmData.append("tenPhim", this.film.filmName);
         frmData.append("maNhom", configs.groupID);
 
         this.adminService
@@ -197,25 +197,25 @@ export class FilmComponent implements OnInit {
   }
 
   confirmEdit() {
-    this.film.maPhim = this.addFilmForm.get("filmID").value;
-    this.film.tenPhim = this.addFilmForm.get("filmName").value;
-    this.film.biDanh = this.addFilmForm.get("slugFilm").value;
+    this.film.filmId = this.addFilmForm.get("filmID").value;
+    this.film.filmName = this.addFilmForm.get("filmName").value;
+    this.film.alias = this.addFilmForm.get("slugFilm").value;
     this.film.trailer = this.addFilmForm.get("trailer").value;
-    this.film.hinhAnh = this.imgEdit;
-    this.film.moTa = this.addFilmForm.get("description").value;
-    this.film.ngayKhoiChieu = this.getDate(
+    this.film.image = this.imgEdit;
+    this.film.description = this.addFilmForm.get("description").value;
+    this.film.openingDate = this.getDate(
       this.addFilmForm.get("premiereDate").value
     );
-    this.film.danhGia = this.addFilmForm.get("rate").value;
-    this.film.maNhom = configs.groupID;
+    this.film.review = this.addFilmForm.get("rate").value;
+    this.film.groupId = configs.groupID;
     console.log(this.film);
     this.adminService.postUpdateFilm(this.film, this.accessToken).subscribe(
       res => {
         if (this.addFilmForm.get("imgFilm").value) {
           console.log(this.imgFilm);
           let frmData = new FormData();
-          frmData.append("File", this.imgFilm, this.film.tenPhim + "gr11.jpg");
-          frmData.append("tenPhim", this.film.tenPhim);
+          frmData.append("File", this.imgFilm, this.film.filmName + "gr11.jpg");
+          frmData.append("tenPhim", this.film.filmName);
           frmData.append("maNhom", configs.groupID);
 
           this.adminService

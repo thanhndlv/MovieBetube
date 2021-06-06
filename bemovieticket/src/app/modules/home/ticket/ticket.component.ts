@@ -1,5 +1,5 @@
 import { HomeService } from './../../../_core/service/home.service';
-import { ListTicket, BookingTicket } from './../../../_core/model/model';
+import { TicketList, BookingTicket } from './../../../_core/model/model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from "jquery";
@@ -14,7 +14,7 @@ export class TicketComponent implements OnInit {
   listSeat: any;
   listNormalSeat: any;
   listVIPSeat: any;
-  listTicket: ListTicket[] = [];
+  listTicket: TicketList[] = [];
   bookingObj: BookingTicket = new BookingTicket();
   totalAmount = 0;
   filmInfo: any;
@@ -24,7 +24,7 @@ export class TicketComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private _homeService: HomeService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     let width = window.innerWidth;
@@ -33,7 +33,7 @@ export class TicketComponent implements OnInit {
     }
     let user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
-      this.router.navigate(["/account/login"]);
+      this.router.navigate(["/account/sign-in"]);
     }
     this.activeRoute.params.subscribe(
       result => {
@@ -64,37 +64,50 @@ export class TicketComponent implements OnInit {
     let id = event.target.id;
     if (!className.includes("bg-success")) {
       $("#" + id).addClass("bg-success");
-      let ticket = new ListTicket();
-      ticket.maGhe = id;
-      ticket.giaVe = seat.giaVe;
+      let ticket = new TicketList();
+      ticket.seatId = id;
+      ticket.fare = seat.giaVe;
       this.listTicket.push(ticket);
       this.totalAmount = this.totalAmount + seat.giaVe;
     } else {
       $("#" + id).removeClass("bg-success");
-      let index = this.listTicket.findIndex(x => x.maGhe == id);
+      let index = this.listTicket.findIndex(x => x.seatId == id);
       this.listTicket.splice(index, 1);
       this.totalAmount = this.totalAmount - seat.giaVe;
     }
   }
 
-  bookingTicket() {
-    let user = JSON.parse(localStorage.getItem("user"));
+  // bookingTicket() {
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   let token = user.accessToken;
+  //   if (this.listTicket) {
+  //     this.bookingObj.danhSachVe = this.listTicket;
+  //   }
+  //   this.bookingObj.maLichChieu = this.filmInfo.maLichChieu;
+  //   this.bookingObj.taiKhoanNguoiDung = user.taiKhoan;
+  //   this._homeService.postBookingTicket(this.bookingObj).subscribe(
+  //     res => {
+  //       $("#showAlertAddSuccess").click();
+  //       this.getListTicketRoom();
+  //       this.totalAmount = 0;
+  //       this.listTicket = [];
+  //     },
+  //   );
+  // }
+
+
+  async bookingTicket() {
+    let user = JSON.parse(localStorage.getItem('user'));
     let token = user.accessToken;
     if (this.listTicket) {
-      this.bookingObj.danhSachVe = this.listTicket;
+      this.bookingObj.ticketList = this.listTicket;
     }
-    this.bookingObj.maLichChieu = this.filmInfo.maLichChieu;
-    this.bookingObj.taiKhoanNguoiDung = user.taiKhoan;
-    this._homeService.postBookingTicket(this.bookingObj, token).subscribe(
-      res => {
-        $("#showAlertAddSuccess").click();
-        this.getListTicketRoom();
-        this.totalAmount = 0;
-        this.listTicket = [];
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.bookingObj.showTimeId = this.filmInfo.maLichChieu;
+    this.bookingObj.username = user.taiKhoan;
+    let res = await this._homeService.postBookingTicket(this.bookingObj)
+    $("#showAlertAddSuccess").click();
+    this.getListTicketRoom();
+    this.totalAmount = 0;
+    this.listTicket = [];
   }
 }

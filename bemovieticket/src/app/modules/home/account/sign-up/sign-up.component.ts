@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
 import { HomeService } from './../../../../_core/service/home.service';
-import { UserInfo, UserLogin } from './../../../../_core/model/model';
+import { UserInfo, Account } from './../../../../_core/model/model';
 import { configs } from './../../../../_core/config';
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +13,7 @@ export class SignUpComponent implements OnInit {
   logo = "assets/home/images/logo.png";
   isEqual = true;
   userInfo = new UserInfo();
-  userLogin = new UserLogin();
+  userLogin = new Account();
   error: string;
   signUpForm: any;
   constructor(private homeService: HomeService, private router: Router) { }
@@ -52,13 +52,13 @@ export class SignUpComponent implements OnInit {
     });
   }
   signUp() {
-    this.userInfo.hoTen = this.signUpForm.get("fullName").value;
-    this.userInfo.taiKhoan = this.signUpForm.get("userName").value;
-    this.userInfo.matKhau = this.signUpForm.get("password").value;
+    this.userInfo.fullName = this.signUpForm.get("fullName").value;
+    this.userInfo.username = this.signUpForm.get("userName").value;
+    this.userInfo.password = this.signUpForm.get("password").value;
     this.userInfo.email = this.signUpForm.get("email").value;
-    this.userInfo.soDt = this.signUpForm.get("phoneNumber").value;
-    this.userInfo.maLoaiNguoiDung = configs.userType.user;
-    this.userInfo.maNhom = configs.groupID;
+    this.userInfo.phone = this.signUpForm.get("phoneNumber").value;
+    this.userInfo.roleId = configs.userType.user;
+    this.userInfo.groupId = configs.groupID;
 
     this.homeService.postSignUp(this.userInfo).subscribe(
       res => {

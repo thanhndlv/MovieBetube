@@ -1,44 +1,44 @@
 export class UserInfo {
-  public taiKhoan: string;
-  public matKhau: string;
+  public fullName: string;
+  public username: string;
+  public password: string;
   public email: string;
-  public soDt: string;
-  public maNhom: string;
-  public maLoaiNguoiDung: string;
-  public hoTen: string;
+  public phone: string;
+  public groupId: string;
+  public roleId: string;
 }
 
-export class UserLogin {
-  public taiKhoan: string;
-  public matKhau: string;
+export class Account {
+  public username: string;
+  public password: string;
 }
 
 export class Film {
-  public maPhim: string;
-  public tenPhim: string;
-  public biDanh: string;
+  public filmId: string;
+  public filmName: string;
+  public alias: string;
   public trailer: string;
-  public hinhAnh: string;
-  public moTa: string;
-  public maNhom: string;
-  public ngayKhoiChieu: string;
-  public danhGia: string;
+  public image: string;
+  public description: string;
+  public groupId: string;
+  public openingDate: string;
+  public review: string;
 }
 
-export class ShowTime {
-  public maPhim: string;
-  public ngayChieuGioChieu: string;
-  public maRap: string;
-  public giaVe: string;
+export class MovieSchedule {
+  public filmId: string;
+  public showTime: string;
+  public theaterId: string;
+  public fare: string;
 }
 
 export class BookingTicket {
-  public maLichChieu: string;
-  public danhSachVe: ListTicket[];
-  public taiKhoanNguoiDung: string;
+  public showTimeId: string;
+  public ticketList: TicketList[];
+  public username: string;
 }
 
-export class ListTicket {
-  public maGhe: string;
-  public giaVe: number;
-}
+export class TicketList {
+  public seatId: string;
+  public fare: number;
+}``

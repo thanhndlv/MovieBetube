@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AdminService } from "./../../../_core/service/admin.service";
-import { UserInfo, UserLogin } from "../../../_core/model/model";
+import { UserInfo, Account } from "../../../_core/model/model";
 import { configs } from "../../../_core/config";
 import * as $ from "jquery";
 
@@ -14,7 +14,7 @@ import * as $ from "jquery";
 export class UserComponent implements OnInit {
   isEqual = true; //biến check xem 2 password có giống nhau không
   userInfo = new UserInfo();
-  userLogin = new UserLogin();
+  userLogin = new Account();
   error: string;
   addUserForm: any;
   listUser: any;
@@ -83,12 +83,12 @@ export class UserComponent implements OnInit {
   }
 
   addUser() {
-    this.userInfo.hoTen = this.addUserForm.get("fullName").value;
-    this.userInfo.taiKhoan = this.addUserForm.get("userName").value;
-    this.userInfo.soDt = this.addUserForm.get("phoneNumber").value;
-    this.userInfo.matKhau = this.addUserForm.get("password").value;
-    this.userInfo.maNhom = configs.groupID;
-    this.userInfo.maLoaiNguoiDung = this.addUserForm.get("userType").value;
+    this.userInfo.fullName = this.addUserForm.get("fullName").value;
+    this.userInfo.username = this.addUserForm.get("userName").value;
+    this.userInfo.phone = this.addUserForm.get("phoneNumber").value;
+    this.userInfo.password = this.addUserForm.get("password").value;
+    this.userInfo.groupId = configs.groupID;
+    this.userInfo.roleId = this.addUserForm.get("userType").value;
     this.userInfo.email = this.addUserForm.get("email").value;
     let token = JSON.parse(localStorage.getItem("userAdmin"));
     this.adminService.postAddUser(this.userInfo, token.accessToken).subscribe(
@@ -116,15 +116,15 @@ export class UserComponent implements OnInit {
     this.adminService.getSearchUser(userName).subscribe(
       res => {
         this.userInfo = res[0];
-        this.addUserForm.controls["fullName"].setValue(this.userInfo.hoTen);
-        this.addUserForm.controls["userName"].setValue(this.userInfo.taiKhoan);
-        this.addUserForm.controls["phoneNumber"].setValue(this.userInfo.soDt);
+        this.addUserForm.controls["fullName"].setValue(this.userInfo.fullName);
+        this.addUserForm.controls["userName"].setValue(this.userInfo.username);
+        this.addUserForm.controls["phoneNumber"].setValue(this.userInfo.phone);
         this.addUserForm.controls["userType"].setValue(
-          this.userInfo.maLoaiNguoiDung
+          this.userInfo.roleId
         );
-        this.addUserForm.controls["password"].setValue(this.userInfo.matKhau);
+        this.addUserForm.controls["password"].setValue(this.userInfo.password);
         this.addUserForm.controls["passwordConfirm"].setValue(
-          this.userInfo.matKhau
+          this.userInfo.password
         );
         this.addUserForm.controls["email"].setValue(this.userInfo.email);
       },
@@ -133,12 +133,12 @@ export class UserComponent implements OnInit {
   }
 
   confirmEdit() {
-    this.userInfo.hoTen = this.addUserForm.get("fullName").value;
-    this.userInfo.taiKhoan = this.addUserForm.get("userName").value;
-    this.userInfo.soDt = this.addUserForm.get("phoneNumber").value;
-    this.userInfo.matKhau = this.addUserForm.get("password").value;
-    this.userInfo.maLoaiNguoiDung = this.addUserForm.get("userType").value;
-    this.userInfo.maNhom = configs.groupID;
+    this.userInfo.fullName = this.addUserForm.get("fullName").value;
+    this.userInfo.username = this.addUserForm.get("userName").value;
+    this.userInfo.phone = this.addUserForm.get("phoneNumber").value;
+    this.userInfo.password = this.addUserForm.get("password").value;
+    this.userInfo.roleId = this.addUserForm.get("userType").value;
+    this.userInfo.groupId = configs.groupID;
     this.userInfo.email = this.addUserForm.get("email").value;
 
     let token = JSON.parse(localStorage.getItem("userAdmin"));

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from "./../../../_core/service/home.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { UserInfo, UserLogin } from "../../../_core/model/model";
+import { UserInfo, Account } from "../../../_core/model/model";
 import { first } from "rxjs/operators";
 import * as $ from "jquery";
 import { configs } from "../../../_core/config";
@@ -75,13 +75,13 @@ export class UserDetailComponent implements OnInit {
   updateInfo() {
     let user = JSON.parse(localStorage.getItem("user"));
     let token = user.accessToken;
-    this.userInfo.taiKhoan = this.user.taiKhoan;
+    this.userInfo.username = this.user.taiKhoan;
     this.userInfo.email = this.userForm.get("email").value;
-    this.userInfo.hoTen = this.userForm.get("fullName").value;
-    this.userInfo.maNhom = configs.groupID;
-    this.userInfo.soDt = this.userForm.get("phoneNumber").value;
-    this.userInfo.maLoaiNguoiDung = "KhachHang";
-    this.userInfo.matKhau = this.userForm.get("password").value;
+    this.userInfo.fullName = this.userForm.get("fullName").value;
+    this.userInfo.groupId = configs.groupID;
+    this.userInfo.phone = this.userForm.get("phoneNumber").value;
+    this.userInfo.roleId = "KhachHang";
+    this.userInfo.password = this.userForm.get("password").value;
     this._homeService.putChangeInfoUser(this.userInfo, token).subscribe(
       res => {
         $("#showAlertAddSuccess").click();

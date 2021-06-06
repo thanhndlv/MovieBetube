@@ -46,31 +46,18 @@ export class HomeService {
     return result
   }
 
-  // async postSignIn(username: string, password: string): Promise<any> {
-  //   let result = await this._http.post<any>(this.API_URL.postSignIn, {
-  //     taiKhoan: username,
-  //     matKhau: password
-  //   }).toPromise();
-  //   if (result.accessToken) {
-  //     localStorage.setItem('Token', result.accessToken)
-  //   }
-  //   console.log(result);
-  //   return result;
-  // }
-  public postSignIn(user: any): Observable<any> {
-    //Content-Type là do phía back-end định nghĩa, bắt buộc phải khai báo đúng
-    let header = new HttpHeaders({ "Content-Type": "application/json" });
-    //Khi sử dụng post thì phải gửi kèm theo cục body, ở đây body là {taiKhoan: userName, matKhau: password}
-    //và kèm theo header để server có thể đọc hiểu được request
-    let result = this._http.post(this.API_URL.postSignIn, user, {
-      headers: header,
-      responseType: "json"
-    });
+  async postSignIn(username: string, password: string): Promise<any> {
+    let result = await this._http.post<any>(this.API_URL.postSignIn, {
+      taiKhoan: username,
+      matKhau: password
+    }).toPromise();
+    if (result.accessToken) {
+      localStorage.setItem('Token', result.accessToken)
+    }
     console.log(result);
     return result;
   }
 
-  
   public postSignUp(user: any): Observable<any> {
     let header = new HttpHeaders({ "Content-Type": "application/json" });
     let result: any = this._http.post(this.API_URL.postSignUp, user, {
@@ -104,16 +91,29 @@ export class HomeService {
     return result;
   }
 
-  postBookingTicket(bookingInfo: any, token: string): Observable<any> {
-    let header = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    });
-    let result = this._http.post(
-      this.API_URL.postTicket,
-      bookingInfo,
-      { headers: header, responseType: "text" }
-    );
+  // postBookingTicket(bookingInfo: any, token: string): Observable<any> {
+  //   let header = new HttpHeaders({
+  //     "Content-Type": "application/json",
+  //     Authorization: "Bearer " + token
+  //   });
+  //   let result = this._http.post(
+  //     this.API_URL.postTicket,
+  //     bookingInfo,
+  //     { headers: header, responseType: "text" }
+  //   );
+  //   return result;
+  // }
+
+  // postBookingTicket(bookingInfo: any): Observable<any> {
+  //   let result = this._http.post(
+  //     this.API_URL.postTicket,
+  //     bookingInfo
+  //   );
+  //   return result;
+  // }
+
+  async postBookingTicket(bookingInfo: any): Promise<any> {
+    let result = await this._http.post(this.API_URL.postTicket, bookingInfo).toPromise();
     return result;
   }
 
