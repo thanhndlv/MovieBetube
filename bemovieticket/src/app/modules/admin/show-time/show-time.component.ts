@@ -18,7 +18,7 @@ export class ShowTimeComponent implements OnInit {
   listRoom: any;
   addShowTimeForm: any;
   showTime = new MovieSchedule();
-  filmID: any;
+  filmId: any;
   token = JSON.parse(localStorage.getItem("userAdmin"));
   accessToken = this.token.accessToken;
 
@@ -35,12 +35,12 @@ export class ShowTimeComponent implements OnInit {
       theaterID: new FormControl(""),
       ticketPrice: new FormControl("90000")
     });
-    this.filmID = this.route.snapshot.params.id;
+    this.filmId = this.route.snapshot.params.id;
     this.getListShowtimes();
   }
 
   getListShowtimes() {
-    this.adminService.getListShowtimes(this.filmID).subscribe(
+    this.adminService.getListShowtimes(this.filmId).subscribe(
       res => {
         if (res.heThongRapChieu) {
           this.listSystemTheaters = res.heThongRapChieu;
@@ -52,15 +52,15 @@ export class ShowTimeComponent implements OnInit {
     );
   }
 
-  showTheaters(systemID: string) {
+  showTheaters(systemId: string) {
     this.listTheater = this.listSystemTheaters.find(
-      x => x.maHeThongRap == systemID
+      x => x.maHeThongRap == systemId
     ).cumRapChieu;
   }
 
-  showShowTimes(theaterID: string) {
+  showShowTimes(theaterId: string) {
     this.listShowTime = this.listTheater.find(
-      x => x.maCumRap == theaterID
+      x => x.maCumRap == theaterId
     ).lichChieuPhim;
   }
 
@@ -75,8 +75,8 @@ export class ShowTimeComponent implements OnInit {
     );
   }
 
-  showTheatersAdd(systemID: string) {
-    this.homeService.getListTheaters(systemID).subscribe(
+  showTheatersAdd(systemId: string) {
+    this.homeService.getListTheaters(systemId).subscribe(
       res => {
         this.listTheater = res;
       },
@@ -86,14 +86,14 @@ export class ShowTimeComponent implements OnInit {
     );
   }
 
-  showRoomsAdd(theaterID: string) {
+  showRoomsAdd(theaterId: string) {
     this.listRoom = this.listTheater.find(
-      x => x.maCumRap == theaterID
+      x => x.maCumRap == theaterId
     ).danhSachRap;
   }
 
   addShowTime() {
-    this.showTime.filmId = this.filmID;
+    this.showTime.filmId = this.filmId;
     let date = this.addShowTimeForm.get("date").value;
     let time = this.addShowTimeForm.get("time").value;
     this.showTime.showTime = this.getShowTime(date, time);

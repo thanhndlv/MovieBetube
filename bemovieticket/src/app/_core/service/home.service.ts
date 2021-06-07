@@ -20,7 +20,7 @@ export class HomeService {
     getListSystemTheaters: configs.domain + configs.apiRouter.home.getListSystemTheaters, //tunv edited
     getListTheaters: configs.domain + configs.apiRouter.home.getListTheaters, //tunv edited
     getInfoShowtimeTheater: configs.domain + configs.apiRouter.home.getInfoShowtimeTheater + configs.groupID,
-    getShowtime: configs.domain + configs.apiRouter.home.getShowtime + configs.params.filmID,
+    getShowtime: configs.domain + configs.apiRouter.home.getShowtime + configs.params.filmId,
     postTicket: configs.domain + configs.apiRouter.home.postTicket,
     getListTicketRoom: configs.domain + configs.apiRouter.home.getListTicketRoom, //tunv edited
   }
@@ -42,7 +42,7 @@ export class HomeService {
   }
 
   getInfoShowtimeTheater(systemTheaterId: string): Observable<any> {
-    let result = this._http.get<any>(this.API_URL.getInfoShowtimeTheater + configs.params.systemTheaterID + systemTheaterId)
+    let result = this._http.get<any>(this.API_URL.getInfoShowtimeTheater + configs.params.systemTheaterId + systemTheaterId)
     return result
   }
 
@@ -66,9 +66,9 @@ export class HomeService {
     });
     return result;
   }
-  public getInfoUser(userName: string, token): Observable<any> {
+  public getInfoUser(username: string, token): Observable<any> {
     let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
-    let result = this._http.post(this.API_URL.getInfoUser, { taiKhoan: userName },
+    let result = this._http.post(this.API_URL.getInfoUser, { taiKhoan: username },
       {
         headers: header
       }

@@ -10,7 +10,7 @@ import * as $ from "jquery";
   styleUrls: ['./ticket.component.scss']
 })
 export class TicketComponent implements OnInit {
-  showTimeID: string;
+  showTimeId: string;
   listSeat: any;
   listNormalSeat: any;
   listVIPSeat: any;
@@ -37,7 +37,7 @@ export class TicketComponent implements OnInit {
     }
     this.activeRoute.params.subscribe(
       result => {
-        this.showTimeID = result.showTimeID;
+        this.showTimeId = result.showTimeID;
         this.getListTicketRoom();
       },
       error => {
@@ -47,7 +47,7 @@ export class TicketComponent implements OnInit {
   }
 
   getListTicketRoom() {
-    this._homeService.getListTicketRoom(this.showTimeID).subscribe(res => {
+    this._homeService.getListTicketRoom(this.showTimeId).subscribe(res => {
       this.filmInfo = res.thongTinPhim;
       this.listSeat = res.danhSachGhe;
       this.listNormalSeat = this.listSeat.filter(x => x.loaiGhe == "Thuong");
@@ -56,7 +56,7 @@ export class TicketComponent implements OnInit {
     });
   }
 
-  booking(event: any, seat: any) {
+  chooseSeat(event: any, seat: any) {
     if (seat.daDat) {
       return;
     }

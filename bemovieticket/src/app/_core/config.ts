@@ -47,9 +47,9 @@ export const configs = {
 
   },
   params: {
-    filmID: "&MaPhim=",
+    filmId: "&MaPhim=",
     filmName: "&tenPhim=",
-    systemTheaterID: "&maHeThongRap=", //tunv edited
+    systemTheaterId: "&maHeThongRap=", //tunv edited
     groupID: "&MaNhom=",
     pageSetUp: "&soPhanTuTrenTrang=10&soTrang="
   }

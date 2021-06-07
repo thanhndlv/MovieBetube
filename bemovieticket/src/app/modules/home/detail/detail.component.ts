@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
-  filmID: string;
+  filmId: string;
   filmDetail: any;
   trailer: string;
   isLoading = true;
@@ -23,9 +23,9 @@ export class DetailComponent implements OnInit {
     if (width < 576) {
       this.isMobile = true;
     }
-    this.filmID = this.route.snapshot.params.filmID;
-    if (this.filmID) {
-      this._homeService.getInfoFilm(this.filmID).subscribe(res => {
+    this.filmId = this.route.snapshot.params.filmID;
+    if (this.filmId) {
+      this._homeService.getInfoFilm(this.filmId).subscribe(res => {
         this.filmDetail = res;
         let trailer = this.filmDetail.trailer;
         this.trailer = trailer;
