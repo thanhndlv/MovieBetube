@@ -5,8 +5,8 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeService } from './_core/service/home.service';
 import { AuthInterceptor } from './_core/interceptors/auth.interceptor';
+import { ClientService } from './_core/service/client.service';
 
 
 
@@ -20,7 +20,7 @@ import { AuthInterceptor } from './_core/interceptors/auth.interceptor';
     NgbModule,
     SweetAlert2Module
   ],
-  providers: [HomeService,[{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
+  providers: [ClientService,[{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

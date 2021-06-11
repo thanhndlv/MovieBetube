@@ -44,13 +44,12 @@ export const configs = {
         postAddShowTime: "/api/QuanLyDatVe/TaoLichChieu"
       }
     }
-
   },
   params: {
-    filmId: "&MaPhim=",
+    filmID: "&MaPhim=",
     filmName: "&tenPhim=",
-    systemTheaterId: "&maHeThongRap=", //tunv edited
+    systemTheaterID: "&maHeThongRap=",
     groupID: "&MaNhom=",
-    pageSetUp: "&soPhanTuTrenTrang=10&soTrang="
+    pageSetUp: "&soPhanTuTrenTrang=10&soTrang=",
   }
-}
+};
