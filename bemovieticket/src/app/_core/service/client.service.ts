@@ -89,31 +89,27 @@ export class ClientService {
     return result;
   }
 
-  postBookingTicket(bookingInfo: any, token: string): Observable<any> {
-    let header = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    });
-    let result = this._http.post(
-      this.API_URL.postTicket,
-      bookingInfo,
-      { headers: header, responseType: "text" }
-    );
-    return result;
-  }
-
-  // postBookingTicket(bookingInfo: any): Observable<any> {
+  //CHAY TOT
+  // postBookingTicket(bookingInfo: any, token: string): Observable<any> {
+  //   let header = new HttpHeaders({
+  //     "Content-Type": "application/json",
+  //     Authorization: "Bearer " + token
+  //   });
   //   let result = this._http.post(
   //     this.API_URL.postTicket,
-  //     bookingInfo
+  //     bookingInfo,
+  //     { headers: header, responseType: "text" }
   //   );
   //   return result;
   // }
 
-  // async postBookingTicket(bookingInfo: any): Promise<any> {
-  //   let result = await this._http.post(this.API_URL.postTicket, bookingInfo).toPromise();
-  //   return result;
-  // }
+  postBookingTicket(bookingInfo: any): Observable<any> {
+    let result = this._http.post(
+      this.API_URL.postTicket,
+      bookingInfo, { responseType: "text" }
+    );
+    return result;
+  }
 
   public getInfoFilm(filmID: string): Observable<any> {
     let result = this._http.get(this.API_URL.getInfoFilm + filmID);

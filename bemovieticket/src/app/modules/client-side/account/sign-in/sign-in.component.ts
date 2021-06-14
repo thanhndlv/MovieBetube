@@ -37,11 +37,12 @@ export class SignInComponent implements OnInit {
     const res = await this.clientService.postSignIn(this.user.taiKhoan, this.user.matKhau)
     if (res.maLoaiNguoiDung == configs.userType.user) {
       localStorage.setItem("user", JSON.stringify(res));
-      // localStorage.setItem("token", res.accessToken);
+      localStorage.setItem("token", res.accessToken);
       console.log("abc", JSON.stringify(res));
       this.router.navigate(["/"]);
     } else {
       localStorage.setItem("userAdmin", JSON.stringify(res));
+      localStorage.setItem("token", res.accessToken);
       this.router.navigate(["/admin-side/film"]);
     }
   }

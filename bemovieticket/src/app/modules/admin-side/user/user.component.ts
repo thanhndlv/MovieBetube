@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
     this.userInfo.maLoaiNguoiDung = this.addUserForm.get("userType").value;
     this.userInfo.email = this.addUserForm.get("email").value;
     let token = JSON.parse(localStorage.getItem("userAdmin"));
-    this.adminService.postAddUser(this.userInfo, token.accessToken).subscribe(
+    this.adminService.postAddUser(this.userInfo).subscribe(
       res => {
         this.getListUserPaginate(this.listUser.currentPage);
         $(".close").click();
@@ -142,7 +142,7 @@ export class UserComponent implements OnInit {
     this.userInfo.email = this.addUserForm.get("email").value;
 
     let token = JSON.parse(localStorage.getItem("userAdmin"));
-    this.adminService.putUpdateUser(this.userInfo, token.accessToken).subscribe(
+    this.adminService.putUpdateUser(this.userInfo).subscribe(
       res => {
         if (this.inputSearchUser != "") {
           this.searchUser();
@@ -161,7 +161,7 @@ export class UserComponent implements OnInit {
   deleteUser() {
     let token = JSON.parse(localStorage.getItem("userAdmin"));
     this.adminService
-      .deleteUser(this.userNameDelete, token.accessToken)
+      .deleteUser(this.userNameDelete)
       .subscribe(
         res => {
           if (this.inputSearchUser != "") {

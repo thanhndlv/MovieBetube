@@ -8,7 +8,7 @@
       data-target="#myModal"
       (click)="setUpAddFilm()"
     >
-      Thêm mới
+      <i class="fa fa-user-plus"></i> Thêm mới
     </button>
   </div>
   <div class="col-md-10 pr-0">
@@ -33,7 +33,7 @@
     data-target="#myModal"
     (click)="setUpAddFilm()"
   >
-    Thêm mới
+    <i class="fa fa-user-plus"></i> Thêm mới
   </button>
 </div>
 <div class="table-responsive">
@@ -57,8 +57,7 @@
             class="btn btn-info btn-sm"
             href="{{ film.hinhAnh }}"
             target="_blank"
-          >
-            <span *ngIf="!isMobile">Xem ảnh</span>
+            ><i class="fa fa-eye"></i> <span *ngIf="!isMobile">Xem ảnh</span>
           </a>
         </td>
         <td>
@@ -67,6 +66,7 @@
               class="btn btn-dark mr-2 btn-sm"
               [routerLink]="['/admin-side/film/show-time', film.maPhim]"
             >
+              <i class="fa fa-calendar"></i>
               <span *ngIf="!isMobile">Lịch chiếu</span>
             </a>
             <button
@@ -76,6 +76,7 @@
               data-target="#myModal"
               (click)="editFilm(film.maPhim)"
             >
+              <i class="fa fa-user-edit"></i>
               <span *ngIf="!isMobile">Sửa</span>
             </button>
             <button
@@ -84,6 +85,7 @@
               (click)="setFilmDelete(film.maPhim)"
               [swal]="deleteSwal"
             >
+              <i class="fa fa-user-times"></i>
               <span *ngIf="!isMobile">Xóa</span>
             </button>
           </div>
@@ -159,9 +161,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
+        <!-- <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
           {{ error }}
-        </div>
+        </div> -->
         <div class="sign-up-form text-left bg-white">
           <form [formGroup]="addFilmForm">
             <div class="row">
@@ -272,7 +274,7 @@
               <div class="form-group col-md-6">
                 <label for="">Ngày khởi chiếu</label>
                 <input
-                  type="text"
+                  type="date"
                   class="form-control"
                   formControlName="premiereDate"
                   [ngClass]="{
@@ -327,7 +329,7 @@
 </div>
 <!-- End Modal form thêm mới và sửa thông tin phim -->
 
-<!-- Modal form thêm mới và sửa thông tin phim -->
+<!-- Modal form thêm mới và sửa thông tin lịch chiếu -->
 <div
   id="showTimeModal"
   class="modal fade bd-example-modal-lg"
@@ -352,9 +354,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
+        <!-- <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
           {{ error }}
-        </div>
+        </div> -->
         <div class="sign-up-form text-left bg-white">
           <form [formGroup]="addShowTimeForm">
             <div class="form-group">
@@ -373,7 +375,9 @@
                     class="btn btn-outline-secondary calendar"
                     (click)="d.toggle()"
                     type="button"
-                  ></button>
+                  >
+                    <i class="fa fa-calendar"></i>
+                  </button>
                 </div>
               </div>
             </div>

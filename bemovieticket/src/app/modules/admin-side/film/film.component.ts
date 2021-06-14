@@ -85,9 +85,10 @@ export class FilmComponent implements OnInit {
     this.adminService.getListFilmPaginate(pageNumber).subscribe(
       res => {
         this.listFilm = res;
-        // this.listFilm.item.reverse();
-        // console.log(this.listFilm.items);
       },
+      error => {
+        console.log(error.error);
+      }
     );
   }
 
@@ -121,10 +122,11 @@ export class FilmComponent implements OnInit {
     this.film.trailer = this.addFilmForm.get("trailer").value;
     this.film.hinhAnh = this.film.tenPhim + ".jpg";
     this.film.moTa = this.addFilmForm.get("description").value;
-    this.film.ngayKhoiChieu = this.addFilmForm.get("premiereDate").value;
-    this.film.danhGia = this.addFilmForm.get("rate").value;
+    this.film.ngayKhoiChieu = this.getDate(
+      this.addFilmForm.get("premiereDate").value
+    ); this.film.danhGia = this.addFilmForm.get("rate").value;
     this.film.maNhom = configs.groupID;
-    this.adminService.postAddFilm(this.film, this.accessToken).subscribe(
+    this.adminService.postAddFilm(this.film).subscribe(
       res => {
         let frmData = new FormData();
         frmData.append("File", this.imgFilm, this.film.tenPhim + "gr10.jpg");
@@ -132,15 +134,22 @@ export class FilmComponent implements OnInit {
         frmData.append("maNhom", configs.groupID);
 
         this.adminService
-          .postUploadImgFilm(frmData, this.accessToken)
+          .postUploadImgFilm(frmData)
           .subscribe(
             res => {
               this.getListFilmPaginate(this.listFilm.currentPage);
               $(".close").click();
               $("#showAlertAddSuccess").click();
             },
+            error => {
+              console.log(error);
+              this.error = error.error;
+            }
           );
       },
+      error => {
+        this.error = error.error;
+      }
     );
   }
 
@@ -156,11 +165,16 @@ export class FilmComponent implements OnInit {
   }
 
   deleteFilm() {
-    this.adminService.deleteFilm(this.filmIdDelete, this.accessToken).subscribe(
+    // let userAdmin = JSON.parse(localStorage.getItem("userAdmin"));
+    // userAdmin.maLoaiNguoiDung = "QuanTri"
+    this.adminService.deleteFilm(this.filmIdDelete).subscribe(
       res => {
         this.getListFilmPaginate(this.listFilm.currentPage);
         $("#showAlertDeleteSuccess").click();
       },
+      error => {
+        console.log(error.error);
+      }
     );
   }
 
@@ -198,7 +212,7 @@ export class FilmComponent implements OnInit {
     this.film.danhGia = this.addFilmForm.get("rate").value;
     this.film.maNhom = configs.groupID;
     console.log(this.film);
-    this.adminService.postUpdateFilm(this.film, this.accessToken).subscribe(
+    this.adminService.postUpdateFilm(this.film).subscribe(
       res => {
         if (this.addFilmForm.get("imgFilm").value) {
           console.log(this.imgFilm);
@@ -208,13 +222,17 @@ export class FilmComponent implements OnInit {
           frmData.append("maNhom", configs.groupID);
 
           this.adminService
-            .postUploadImgFilm(frmData, this.accessToken)
+            .postUploadImgFilm(frmData)
             .subscribe(
               res => {
                 this.getListFilmPaginate(this.listFilm.currentPage);
                 $(".close").click();
                 $("#showAlertAddSuccess").click();
               },
+              error => {
+                console.log(error);
+                this.error = error.error;
+              }
             );
         } else {
           this.getListFilmPaginate(this.listFilm.currentPage);
@@ -223,6 +241,9 @@ export class FilmComponent implements OnInit {
         }
         console.log(res);
       },
+      error => {
+        console.log(error);
+      }
     );
   }
 

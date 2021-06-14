@@ -38,19 +38,14 @@ export class AdminService {
     getListShowtimes: configs.domain + configs.apiRouter.home.getShowtime,
   };
 
-  responseType = "json";
-  header = new HttpHeaders({ "Content-Type": "application/json" });
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   // User API
-  postAddUser(userInfo: any, token: string): Observable<any> {
+  postAddUser(userInfo: any): Observable<any> {
     let result = this._http.post(this.API_URL.postAddUser, userInfo, {
-      headers: this.createHeaderWithAuth(token),
       responseType: "json"
     });
-    console.log(token);
-    console.log(result);
     return result;
   }
 
@@ -69,24 +64,22 @@ export class AdminService {
   getSearchUser(userName: any): Observable<any> {
     let result: any = this._http.get(
       this.API_URL.getSearchUser +
-        userName +
-        configs.params.groupID +
-        configs.groupID
+      userName +
+      configs.params.groupID +
+      configs.groupID
     );
     return result;
   }
 
-  deleteUser(userName: any, token: string): Observable<any> {
+  deleteUser(userName: any): Observable<any> {
     let result: any = this._http.delete(this.API_URL.deleteUser + userName, {
-      headers: this.createHeaderWithAuth(token),
       responseType: "text"
     });
     return result;
   }
 
-  putUpdateUser(userInfo: any, token: string): Observable<any> {
+  putUpdateUser(userInfo: any): Observable<any> {
     let result: any = this._http.put(this.API_URL.putUpdateUser, userInfo, {
-      headers: this.createHeaderWithAuth(token),
       responseType: "text"
     });
     return result;
@@ -103,25 +96,22 @@ export class AdminService {
     return result;
   }
 
-  postAddFilm(film: any, token: string): Observable<any> {
+  postAddFilm(film: any): Observable<any> {
     let result = this._http.post(this.API_URL.postAddFilm, film, {
-      headers: this.createHeaderWithAuth(token),
       responseType: "json"
     });
     return result;
   }
 
-  postUploadImgFilm(data: any, token: string): Observable<any> {
+  postUploadImgFilm(data: any): Observable<any> {
     let result = this._http.post(this.API_URL.postUploadImgFilm, data, {
-      headers: this.createHeaderWithAuthNotContentType(token),
-      responseType: "text"
+      responseType: "text",
     });
     return result;
   }
 
-  deleteFilm(filmID: any, token: string): Observable<any> {
-    let result: any = this._http.delete(this.API_URL.deleteFilm + filmID, {
-      headers: this.createHeaderWithAuth(token),
+  deleteFilm(filmID: any): Observable<any> {
+    let result = this._http.delete(this.API_URL.deleteFilm + filmID, {
       responseType: "text"
     });
     return result;
@@ -132,19 +122,18 @@ export class AdminService {
     return result;
   }
 
-  postUpdateFilm(filmInfo: any, token: string): Observable<any> {
+  postUpdateFilm(filmInfo: any): Observable<any> {
     let result: any = this._http.post(this.API_URL.postUpdateFilm, filmInfo, {
-      headers: this.createHeaderWithAuth(token),
       responseType: "text"
     });
     return result;
   }
 
-  postAddShowTime(showTimeInfo: any, token: string): Observable<any> {
+  postAddShowTime(showTimeInfo: any): Observable<any> {
     let result: any = this._http.post(
       this.API_URL.postAddShowTime,
       showTimeInfo,
-      { headers: this.createHeaderWithAuth(token), responseType: "text" }
+      { responseType: "text" }
     );
     return result;
   }
@@ -158,16 +147,16 @@ export class AdminService {
   }
   // End Showtime API
 
-  createHeaderWithAuth(token: string): HttpHeaders {
-    return new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    });
-  }
+  // createHeaderWithAuth(token: string): HttpHeaders {
+  //   return new HttpHeaders({
+  //     "Content-Type": "application/json",
+  //     Authorization: "Bearer " + token
+  //   });
+  // }
 
-  createHeaderWithAuthNotContentType(token: string): HttpHeaders {
-    return new HttpHeaders({
-      Authorization: "Bearer " + token
-    });
-  }
+  // createHeaderWithAuthNotContentType(token: string): HttpHeaders {
+  //   return new HttpHeaders({
+  //     Authorization: "Bearer " + token
+  //   });
+  // }
 }

@@ -1,3 +1,5 @@
+import { AuthInterceptor } from './../../_core/interceptors/auth.interceptor';
+import { AdminService } from './../../_core/service/admin.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminSideComponent } from './admin-side.component';
@@ -8,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShowTimeComponent } from './show-time/show-time.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const adminRoutes: Routes = [
   {
@@ -36,6 +39,7 @@ const adminRoutes: Routes = [
     SweetAlert2Module,
     NgbModule,
     RouterModule.forChild(adminRoutes)
-  ]
+  ],
+  providers: [AdminService, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
 })
 export class AdminSideModule { }

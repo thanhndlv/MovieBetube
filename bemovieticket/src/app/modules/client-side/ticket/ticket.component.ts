@@ -77,15 +77,32 @@ export class TicketComponent implements OnInit {
     }
   }
 
-  bookingTicket() {
+  // bookingTicket() {
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   let token = user.accessToken;
+  //   if (this.listTicket) {
+  //     this.bookingObj.danhSachVe = this.listTicket;
+  //   }
+  //   this.bookingObj.maLichChieu = this.filmInfo.maLichChieu;
+  //   this.bookingObj.taiKhoanNguoiDung = user.taiKhoan;
+  //   this.clientService.postBookingTicket(this.bookingObj, token).subscribe(
+  //     res => {
+  //       $("#showAlertAddSuccess").click();
+  //       this.getListTicketRoom();
+  //       this.totalAmount = 0;
+  //       this.listTicket = [];
+  //     },
+  //   );
+  // }
+
+    bookingTicket() {
     let user = JSON.parse(localStorage.getItem("user"));
-    let token = user.accessToken;
     if (this.listTicket) {
       this.bookingObj.danhSachVe = this.listTicket;
     }
     this.bookingObj.maLichChieu = this.filmInfo.maLichChieu;
     this.bookingObj.taiKhoanNguoiDung = user.taiKhoan;
-    this.clientService.postBookingTicket(this.bookingObj, token).subscribe(
+    this.clientService.postBookingTicket(this.bookingObj).subscribe(
       res => {
         $("#showAlertAddSuccess").click();
         this.getListTicketRoom();
@@ -95,19 +112,4 @@ export class TicketComponent implements OnInit {
     );
   }
 
-
-  // async bookingTicket() {
-  //   let user = JSON.parse(localStorage.getItem('user'));
-  //   let token = user.accessToken;
-  //   if (this.listTicket) {
-  //     this.bookingObj.ticketList = this.listTicket;
-  //   }
-  //   this.bookingObj.showTimeId = this.filmInfo.maLichChieu;
-  //   this.bookingObj.username = user.taiKhoan;
-  //   let res = await this.clientService.postBookingTicket(this.bookingObj)
-  //   $("#showAlertAddSuccess").click();
-  //   this.getListTicketRoom();
-  //   this.totalAmount = 0;
-  //   this.listTicket = [];
-  // }
 }

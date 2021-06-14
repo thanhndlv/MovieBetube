@@ -101,7 +101,7 @@ export class ShowTimeComponent implements OnInit {
     this.showTime.giaVe = this.addShowTimeForm.get("ticketPrice").value;
 
     this.adminService
-      .postAddShowTime(this.showTime, this.accessToken)
+      .postAddShowTime(this.showTime)
       .subscribe(
         res => {
           $(".close").click();
