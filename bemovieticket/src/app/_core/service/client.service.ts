@@ -67,8 +67,9 @@ export class ClientService {
     );
     return result;
   }
-  public putChangeInfoUser(userInfo: any): Observable<any[]> {
-    let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
+  public putChangeInfoUser(userInfo: any): Observable<any> {
+    let result = this._http.put(this.API_URL.putChangeInfoUser, userInfo, {
+      responseType: "json"
     });
     return result;
   }
