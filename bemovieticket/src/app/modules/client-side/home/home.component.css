@@ -66,4 +66,12 @@
   -webkit-transform: translateY(-20px);
           transform: translateY(-20px);
 }
+
+* .image-system:hover {
+  cursor: pointer;
+}
+
+* .theater:hover {
+  cursor: pointer;
+}
 /*# sourceMappingURL=home.component.css.map */

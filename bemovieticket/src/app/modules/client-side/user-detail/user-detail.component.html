@@ -69,7 +69,7 @@
               <div class="col-lg-9">
                 <input
                   class="form-control"
-                  type="text"
+                  type="password"
                   formControlName="password"
                 />
               </div>
@@ -103,7 +103,7 @@
               *ngFor="let his of bookingHistory; let last = last; let i = index"
             >
               <h5 class="font-weight-bold">{{ his.tenPhim }}</h5>
-              <h6>Ngày đặt: {{ his.ngayDat }}</h6>
+              <h6>Ngày đặt: {{ his.ngayDat | date: 'dd/MM/yyyy' }}</h6>
               <button
                 (click)="showModal(i)"
                 data-toggle="modal"
@@ -115,7 +115,7 @@
               <hr *ngIf="!last" />
             </ng-container>
           </div>
-          <h6 *ngIf="!bookingHistory">Không có dữ liệu</h6>
+          <p *ngIf="bookingHistory==false" style="color: #929292;">Không có dữ liệu.</p>
         </div>
       </div>
       <!-- /form user info -->
@@ -166,4 +166,3 @@
     </div>
   </div>
 </div>
-    

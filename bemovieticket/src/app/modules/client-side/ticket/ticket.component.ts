@@ -31,7 +31,7 @@ export class TicketComponent implements OnInit {
     if (width < 576) {
       this.isMobile = true;
     }
-    let user = JSON.parse(localStorage.getItem("user"));
+    let user = JSON.parse(localStorage.getItem('user'));
     if (!user) {
       this.router.navigate(["/account/sign-in"]);
     }
@@ -95,8 +95,8 @@ export class TicketComponent implements OnInit {
   //   );
   // }
 
-    bookingTicket() {
-    let user = JSON.parse(localStorage.getItem("user"));
+  bookingTicket() {
+    let user = JSON.parse(localStorage.getItem('user'));
     if (this.listTicket) {
       this.bookingObj.danhSachVe = this.listTicket;
     }
@@ -111,5 +111,4 @@ export class TicketComponent implements OnInit {
       },
     );
   }
-
 }

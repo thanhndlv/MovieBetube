@@ -57,27 +57,18 @@ export class ClientService {
   }
 
   public postSignUp(user: any): Observable<any> {
-    let header = new HttpHeaders({ "Content-Type": "application/json" });
     let result: any = this._http.post(this.API_URL.postSignUp, user, {
-      headers: header,
       responseType: "json"
     });
     return result;
   }
-  public getInfoUser(username: string, token): Observable<any> {
-    let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
+  public getInfoUser(username: string): Observable<any> {
     let result = this._http.post(this.API_URL.getInfoUser, { taiKhoan: username },
-      {
-        headers: header
-      }
-
     );
     return result;
   }
-  public putChangeInfoUser(userInfo: any, token: string): Observable<any[]> {
-    let header = new HttpHeaders({ "Content-Type": "application/json", Authorization: "Bearer " + token });
+  public putChangeInfoUser(userInfo: any): Observable<any[]> {
     let result: any = this._http.post(this.API_URL.putChangeInfoUser, userInfo, {
-      headers: header
     });
     return result;
   }

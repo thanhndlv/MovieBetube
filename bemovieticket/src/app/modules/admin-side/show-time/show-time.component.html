@@ -16,7 +16,7 @@
     id=""
     (change)="showTheaters($event.target.value)"
   >
-    <option value="" hidden>--- Chọn đê ---</option>
+    <option value="" hidden>--- Chọn hệ thống ---</option>
     <option
       *ngFor="let system of listSystemTheaters"
       [value]="system.maHeThongRap"
@@ -33,7 +33,7 @@
     id=""
     (change)="showShowTimes($event.target.value)"
   >
-    <option value="" hidden>--- Chọn đê ---</option>
+    <option value="" hidden>--- Chọn rạp ---</option>
     <option *ngFor="let theater of listTheater" [value]="theater.maCumRap">
       {{ theater.tenCumRap }}
     </option>
@@ -48,17 +48,17 @@
         <th>Ngày giờ chiếu</th>
         <th>Giá vé</th>
         <th>Thời lượng</th>
-        <th>Tùy chọn</th>
+        <!-- <th>Tùy chọn</th> -->
       </tr>
     </thead>
     <tbody *ngIf="listShowTime">
       <tr *ngFor="let showTime of listShowTime">
         <td>{{ showTime.maLichChieu }}</td>
         <td>{{ showTime.maRap }}</td>
-        <td>{{ showTime.ngayChieuGioChieu }}</td>
+        <td>{{ showTime.ngayChieuGioChieu | date :'dd/MM/yyyy'}}</td>
         <td>{{ showTime.giaVe }}</td>
         <td>{{ showTime.thoiLuong }}</td>
-        <td>Hi</td>
+        <!-- <td>Hi</td> -->
       </tr>
     </tbody>
   </table>
@@ -141,7 +141,7 @@
                 id=""
                 (change)="showRoomsAdd($event.target.value)"
               >
-                <option value="" hidden>--- Chọn đê ---</option>
+                <option value="" hidden>--- Chọn hệ thống ---</option>
                 <option
                   *ngFor="let theater of listTheater"
                   [value]="theater.maCumRap"
@@ -153,7 +153,7 @@
             <div class="form-group" *ngIf="listRoom">
               <label for="">Chọn rạp</label>
               <select class="custom-select" formControlName="theaterID">
-                <option value="" hidden>--- Chọn đê ---</option>
+                <option value="" hidden>--- Chọn rạp ---</option>
                 <option *ngFor="let room of listRoom" [value]="room.maRap">
                   {{ room.tenRap }}
                 </option>

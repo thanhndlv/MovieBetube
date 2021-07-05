@@ -1,3 +1,17 @@
-#imgEdit{
-    max-width: 100px;
+#imgEdit {
+  max-width: 100px;
+}
+
+.form-group {
+  textarea {
+    resize: none;
+  }
+}
+
+#tdFilmName{
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  max-width: 200px; 
+  height: 1.2em; 
+  white-space: nowrap;
 }

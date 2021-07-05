@@ -14,7 +14,7 @@ export class Account {
 }
 
 export class Film {
-  public maPhim: string;
+  public maPhim: number;
   public tenPhim: string;
   public biDanh: string;
   public trailer: string;

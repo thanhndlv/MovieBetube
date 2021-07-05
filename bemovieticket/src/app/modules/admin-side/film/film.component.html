@@ -8,7 +8,7 @@
       data-target="#myModal"
       (click)="setUpAddFilm()"
     >
-      <i class="fa fa-user-plus"></i> Thêm mới
+      Thêm mới
     </button>
   </div>
   <div class="col-md-10 pr-0">
@@ -33,7 +33,7 @@
     data-target="#myModal"
     (click)="setUpAddFilm()"
   >
-    <i class="fa fa-user-plus"></i> Thêm mới
+    Thêm mới
   </button>
 </div>
 <div class="table-responsive">
@@ -49,7 +49,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let film of listFilm.items">
-        <td>{{ film.tenPhim }}</td>
+        <td id="tdFilmName" title="{{ film.tenPhim }}">{{ film.tenPhim }}</td>
         <td>{{ film.maPhim }}</td>
         <td>{{ film.danhGia }}</td>
         <td>
@@ -57,7 +57,7 @@
             class="btn btn-info btn-sm"
             href="{{ film.hinhAnh }}"
             target="_blank"
-            ><i class="fa fa-eye"></i> <span *ngIf="!isMobile">Xem ảnh</span>
+            ><i class="fa fa-eye"></i> <span *ngIf="!isMobile">  Xem ảnh</span>
           </a>
         </td>
         <td>
@@ -67,7 +67,7 @@
               [routerLink]="['/admin-side/film/show-time', film.maPhim]"
             >
               <i class="fa fa-calendar"></i>
-              <span *ngIf="!isMobile">Lịch chiếu</span>
+              <span *ngIf="!isMobile">  Lịch chiếu</span>
             </a>
             <button
               type="button"
@@ -85,7 +85,6 @@
               (click)="setFilmDelete(film.maPhim)"
               [swal]="deleteSwal"
             >
-              <i class="fa fa-user-times"></i>
               <span *ngIf="!isMobile">Xóa</span>
             </button>
           </div>
@@ -161,15 +160,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
+        <div
+          class="alert alert-danger mb-3"
+          role="alert"
+          *ngIf="error && isError == true"
+        >
           {{ error }}
-        </div> -->
+        </div>
+
         <div class="sign-up-form text-left bg-white">
           <form [formGroup]="addFilmForm">
             <div class="row">
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                 <label for="">Mã phim</label>
-                <!-- Nếu class 'is-invalid' được sử dụng thì class 'invalid-feedback' cũng sẽ hiển thị theo, phần này bootstrap đã hỗ trợ sẵn -->
                 <input
                   [readonly]="isEdit"
                   type="text"
@@ -183,8 +186,8 @@
                   }"
                 />
                 <div class="invalid-feedback">Mã phim không hợp lệ</div>
-              </div>
-              <div class="form-group col-md-6">
+              </div> -->
+              <div class="form-group col-md-12">
                 <label for="">Tên phim</label>
                 <input
                   type="text"
@@ -274,7 +277,9 @@
               <div class="form-group col-md-6">
                 <label for="">Ngày khởi chiếu</label>
                 <input
+                  id="txtDate"
                   type="date"
+                  [min]="date2"
                   class="form-control"
                   formControlName="premiereDate"
                   [ngClass]="{
@@ -286,9 +291,10 @@
                 />
                 <div class="invalid-feedback">Ngày khởi chiếu không hợp lệ</div>
               </div>
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                 <label for="">Đánh giá</label>
                 <input
+                  readonly
                   type="text"
                   class="form-control"
                   formControlName="rate"
@@ -300,7 +306,7 @@
                   }"
                 />
                 <div class="invalid-feedback">Đánh giá không hợp lệ</div>
-              </div>
+              </div> -->
             </div>
             <!-- Nếu các field của Form không hợp lệ thì disable nút Lưu thông tin đi -->
             <button
@@ -354,9 +360,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
+        <div
+          class="alert alert-danger mb-3"
+          role="alert"
+          *ngIf="error && isError == true"
+        >
           {{ error }}
-        </div> -->
+        </div>
         <div class="sign-up-form text-left bg-white">
           <form [formGroup]="addShowTimeForm">
             <div class="form-group">

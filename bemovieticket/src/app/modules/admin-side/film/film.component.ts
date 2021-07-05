@@ -5,6 +5,7 @@ import { AdminService } from "./../../../_core/service/admin.service";
 import { Film, FilmSchedule } from "../../../_core/model/model";
 import { configs } from "../../../_core/config";
 import * as $ from "jquery";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-film",
@@ -12,6 +13,8 @@ import * as $ from "jquery";
   styleUrls: ["./film.component.scss"]
 })
 export class FilmComponent implements OnInit {
+  date1 = new Date();
+  date2: any
   listFilm: any;
   film = new Film();
   addFilmForm: any;
@@ -19,15 +22,14 @@ export class FilmComponent implements OnInit {
   formTitle: string;
   isEdit = false;
   error: string;
+  isError = false;
   filmIdDelete: string;
-  imgFilm: any;
+  imgFilm: string;
   imgEdit: string;
   filmID: any;
-  token = JSON.parse(localStorage.getItem("userAdmin"));
-  accessToken = this.token.accessToken;
   isMobile = false;
 
-  constructor(private adminService: AdminService, private router: Router) { }
+  constructor(private adminService: AdminService, private router: Router, private datePipe: DatePipe) { }
 
   ngOnInit() {
     let width = window.innerWidth;
@@ -36,14 +38,13 @@ export class FilmComponent implements OnInit {
     }
     this.createForm();
     this.getListFilmPaginate(1);
+    this.date2 = this.datePipe.transform(this.date1, "yyyy-MM-dd")
+
   }
 
   createForm() {
     this.addFilmForm = new FormGroup({
       filmID: new FormControl("", [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(10)
       ]),
       filmName: new FormControl("", [
         Validators.required,
@@ -68,7 +69,6 @@ export class FilmComponent implements OnInit {
         Validators.maxLength(100)
       ]),
       rate: new FormControl("", [
-        Validators.required,
         Validators.minLength(1),
         Validators.maxLength(2)
       ])
@@ -113,25 +113,31 @@ export class FilmComponent implements OnInit {
     this.addFilmForm.reset();
     this.formTitle = "Thêm phim mới";
     this.isEdit = false;
+    this.isError = false;
   }
 
   addFilm() {
-    this.film.maPhim = this.addFilmForm.get("filmID").value;
+    this.film.maPhim = Math.floor(Math.random() * 99999)
+    // this.film.maPhim = this.addFilmForm.get("filmID").value;
     this.film.tenPhim = this.addFilmForm.get("filmName").value;
     this.film.biDanh = this.addFilmForm.get("slugFilm").value;
     this.film.trailer = this.addFilmForm.get("trailer").value;
-    this.film.hinhAnh = this.film.tenPhim + ".jpg";
+    // this.film.hinhAnh = this.film.tenPhim + ".jpg";
+    this.film.hinhAnh = this.imgFilm;
     this.film.moTa = this.addFilmForm.get("description").value;
     this.film.ngayKhoiChieu = this.getDate(
       this.addFilmForm.get("premiereDate").value
-    ); this.film.danhGia = this.addFilmForm.get("rate").value;
+    );
+    this.film.danhGia = "0"
     this.film.maNhom = configs.groupID;
     this.adminService.postAddFilm(this.film).subscribe(
       res => {
         let frmData = new FormData();
-        frmData.append("File", this.imgFilm, this.film.tenPhim + "gr10.jpg");
-        frmData.append("tenPhim", this.film.tenPhim);
-        frmData.append("maNhom", configs.groupID);
+        // frmData.append("File", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png");
+        // frmData.append("File", this.imgFilm, this.film.tenPhim + "gr10.jpg");
+        frmData.append("File", this.imgFilm);
+        // frmData.append("tenPhim", this.film.tenPhim);
+        // frmData.append("maNhom", configs.groupID);
 
         this.adminService
           .postUploadImgFilm(frmData)
@@ -142,20 +148,30 @@ export class FilmComponent implements OnInit {
               $("#showAlertAddSuccess").click();
             },
             error => {
-              console.log(error);
+              this.isError = true;
               this.error = error.error;
+              console.log(this.error);
             }
           );
       },
       error => {
+        this.isError = true;
         this.error = error.error;
+        console.log(this.error)
       }
     );
   }
 
+  // onFileSelect(event) {
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.imgFilm = file;
+  //   }
+  // }
+
   onFileSelect(event) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+      const file = "../../../../assets/home/images/not-image.png"
       this.imgFilm = file;
     }
   }
@@ -173,7 +189,9 @@ export class FilmComponent implements OnInit {
         $("#showAlertDeleteSuccess").click();
       },
       error => {
-        console.log(error.error);
+        this.isError = true;
+        this.error = error
+        console.log(this.error);
       }
     );
   }
@@ -182,6 +200,7 @@ export class FilmComponent implements OnInit {
     this.addFilmForm.reset();
     this.formTitle = "Chỉnh sửa thông tin phim";
     this.isEdit = true;
+    this.isError = false
     this.adminService.getSearchFilm(filmID).subscribe(
       res => {
         this.addFilmForm.get("filmID").setValue(res.maPhim);
@@ -194,7 +213,9 @@ export class FilmComponent implements OnInit {
         this.addFilmForm.get("rate").setValue(res.danhGia);
       },
       error => {
-        console.log(error);
+        this.isError = true;
+        this.error = error.error
+        console.log(this.error);
       }
     );
   }
@@ -204,7 +225,7 @@ export class FilmComponent implements OnInit {
     this.film.tenPhim = this.addFilmForm.get("filmName").value;
     this.film.biDanh = this.addFilmForm.get("slugFilm").value;
     this.film.trailer = this.addFilmForm.get("trailer").value;
-    this.film.hinhAnh = this.imgEdit;
+    this.film.hinhAnh = this.imgFilm;
     this.film.moTa = this.addFilmForm.get("description").value;
     this.film.ngayKhoiChieu = this.getDate(
       this.addFilmForm.get("premiereDate").value
@@ -230,8 +251,10 @@ export class FilmComponent implements OnInit {
                 $("#showAlertAddSuccess").click();
               },
               error => {
-                console.log(error);
+                this.isError = true;
                 this.error = error.error;
+                console.log(this.error);
+
               }
             );
         } else {
@@ -242,7 +265,9 @@ export class FilmComponent implements OnInit {
         console.log(res);
       },
       error => {
-        console.log(error);
+        this.isError = true;
+        this.error = error.error;
+        console.log(this.error);
       }
     );
   }
@@ -259,3 +284,5 @@ export class FilmComponent implements OnInit {
     this.filmID = filmID;
   }
 }
+
+

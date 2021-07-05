@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
     this.getUserInfo();
   }
   getUserInfo() {
-    this.clientService.getInfoUser(this.userName, this.token).subscribe(
+    this.clientService.getInfoUser(this.userName).subscribe(
       res => {
         this.user = res;
         this.bookingHistory = this.user.thongTinDatVe;
@@ -73,8 +73,8 @@ export class UserDetailComponent implements OnInit {
 
   }
   updateInfo() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    let token = user.accessToken;
+    // let user = JSON.parse(localStorage.getItem("user"));
+    // let token = user.accessToken;
     this.userInfo.taiKhoan = this.user.taiKhoan;
     this.userInfo.email = this.userForm.get("email").value;
     this.userInfo.hoTen = this.userForm.get("fullName").value;
@@ -82,7 +82,7 @@ export class UserDetailComponent implements OnInit {
     this.userInfo.soDt = this.userForm.get("phoneNumber").value;
     this.userInfo.maLoaiNguoiDung = "KhachHang";
     this.userInfo.matKhau = this.userForm.get("password").value;
-    this.clientService.putChangeInfoUser(this.userInfo, token).subscribe(
+    this.clientService.putChangeInfoUser(this.userInfo).subscribe(
       res => {
         $("#showAlertAddSuccess").click();
         this.getUserInfo();

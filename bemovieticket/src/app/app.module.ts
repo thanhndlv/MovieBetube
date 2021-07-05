@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { AdminService } from './_core/service/admin.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserModule } from "@angular/platform-browser";
@@ -21,7 +22,7 @@ import { ClientService } from './_core/service/client.service';
     NgbModule,
     SweetAlert2Module
   ],
-  providers: [ClientService, AdminService, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
+  providers: [ClientService, AdminService, DatePipe, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

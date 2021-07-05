@@ -111,7 +111,7 @@ export class UserComponent implements OnInit {
 
   editUser(userName: any) {
     this.addUserForm.reset();
-    this.formTitle = "Chỉnh sửa thông tin người dùng";
+    this.formTitle = "Cấp quyền";
     this.isEdit = true;
     this.adminService.getSearchUser(userName).subscribe(
       res => {

@@ -367,15 +367,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
+        <!-- <div class="alert alert-danger mb-3" role="alert" *ngIf="error">
           {{ error }}
-        </div>
+        </div> -->
         <div class="sign-up-form text-left bg-white">
           <form [formGroup]="addUserForm">
-            <div class="form-group">
+            <div class="form-group" [hidden]="isEdit">
               <label for="">Họ tên</label>
               <!-- Nếu class 'is-invalid' được sử dụng thì class 'invalid-feedback' cũng sẽ hiển thị theo, phần này bootstrap đã hỗ trợ sẵn -->
               <input
+                [readonly]="isEdit"
                 type="text"
                 class="form-control"
                 formControlName="fullName"
@@ -389,7 +390,7 @@
               <div class="invalid-feedback">Họ và tên không hợp lệ</div>
             </div>
             <div class="row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" [hidden]="isEdit">
                 <label for="">Tài khoản</label>
                 <input
                   [readonly]="isEdit"
@@ -405,9 +406,10 @@
                 />
                 <div class="invalid-feedback">Tài khoản không hợp lệ</div>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" [hidden]="isEdit">
                 <label for="">Số điện thoại</label>
                 <input
+                  [readonly]="isEdit"
                   type="text"
                   class="form-control"
                   formControlName="phoneNumber"
@@ -451,9 +453,10 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" [hidden]="isEdit">
                 <label for="">Mật khẩu</label>
                 <input
+                  [readonly]="isEdit"
                   type="password"
                   class="form-control"
                   formControlName="password"
@@ -467,9 +470,10 @@
                 />
                 <div class="invalid-feedback">Mật khẩu không hợp lệ</div>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6" [hidden]="isEdit">
                 <label for="">Nhập lại mật khẩu</label>
                 <input
+                  [readonly]="isEdit"
                   type="password"
                   class="form-control"
                   formControlName="passwordConfirm"
@@ -484,9 +488,10 @@
                 <div class="invalid-feedback">Mật khẩu không hợp lệ</div>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [hidden]="isEdit">
               <label for="">Email</label>
               <input
+                [readonly]="isEdit"
                 type="text"
                 class="form-control"
                 formControlName="email"
